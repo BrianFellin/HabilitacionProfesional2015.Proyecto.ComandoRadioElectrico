@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComandoRadioElectrico.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace ComandoRadioElectrico.WinForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            //Inicializo el contenedor de implementaciones del Core
+            new ImplementationsContainer().Initialize();
         }
     }
 }
+

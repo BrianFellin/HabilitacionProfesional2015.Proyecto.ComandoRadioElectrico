@@ -7,13 +7,13 @@ using ComandoRadioElectrico.Core.Servicios.Aplication.Interface;
 
 namespace ComandoRadioElectrico.Core.Servicios.Aplication.Implementation
 {
-    public class PartnerManagementService : IPartnerManagementService
+    public class PartnerManagementService : BaseService, IPartnerManagementService
     {
         public PartnerDTO GetPartner(int pPartnerId)
         { 
             
             // obtencion del servicio de socios
-            IPartnerService mPartnerService = new PartnerService();
+            IPartnerService mPartnerService = this.Resolve<IPartnerService>();            
             Partner mPartner = mPartnerService.GetById(pPartnerId);
             if (mPartner == null)
                 throw new System.InvalidOperationException(string.Format("Socio no encontrado", pPartnerId));
