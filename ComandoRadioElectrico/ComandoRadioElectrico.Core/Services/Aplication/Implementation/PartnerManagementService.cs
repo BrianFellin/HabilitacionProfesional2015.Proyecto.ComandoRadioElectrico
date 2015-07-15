@@ -42,7 +42,7 @@ namespace ComandoRadioElectrico.Core.Servicios.Aplication.Implementation
         public PartnerDTO UpdatePartner(PartnerDTO pPartnerToUpdate)
         {
             // validamos parametro de entrada
-            if (pPartnerToUpdate == null) throw new System.ArgumentNullException("pClientToUpdate");
+            if (pPartnerToUpdate == null) throw new System.ArgumentNullException("pPartnerToUpdate");
 
             // obtencion del servicio de socios 
             IPartnerService mPartnerSvc = new PartnerService(); 

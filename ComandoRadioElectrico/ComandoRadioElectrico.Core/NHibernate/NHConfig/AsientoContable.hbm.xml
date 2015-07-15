@@ -3,12 +3,11 @@
   <class name="AccountingEntry" table="AsientoContable">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
-    </id>
-    <property name="FirstName" column="Nombre"/>
+    </id>    
     <property name="Code" column="Codigo"/>    
     <property name="Date" column="Fecha"/>
     <property name="Description" column="Descripcion"/>
-
+    
     <many-to-one name="Balance" 
                  column="IdBalance" class="Balance" 
                  not-null="true"/>

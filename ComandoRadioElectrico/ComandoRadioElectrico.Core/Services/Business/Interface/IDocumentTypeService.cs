@@ -3,7 +3,7 @@ using ComandoRadioElectrico.Core.Servicios.Business.Interface;
 
 namespace ComandoRadioElectrico.Core.Services.Business.Interface
 {
-    public interface IPartnerService : ICRUDBase<Partner>
+    public interface IDocumentTypeService : ICRUDBase<DocumentType>
     {
     }
 }

@@ -15,6 +15,9 @@ namespace ComandoRadioElectrico.Core.Utils
         {
             AutoMapper.Mapper.CreateMap<Partner, PartnerDTO>();
             AutoMapper.Mapper.CreateMap<PartnerDTO, Partner>();
+            AutoMapper.Mapper.CreateMap<DocumentType, DocumentTypeDTO>();            
+            AutoMapper.Mapper.CreateMap<Person, PersonDTO>();
+            AutoMapper.Mapper.CreateMap<PersonDTO, Person>();
         }      
     }
 }

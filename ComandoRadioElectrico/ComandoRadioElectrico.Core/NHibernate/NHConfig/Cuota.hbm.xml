@@ -3,12 +3,11 @@
   <class name="Quota" table="Cuota">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
-    </id>
-    <property name="DateFrom" column="FechaDesda"/>
-    <property name="DateUntil" column="FechaHasta"/>    
-    <property name="DateOfRealization" column="FechaRealizacion"/>
-    <property name="Description" column="Descripcion"/>
-
+    </id>    
+    <property name="Period" column="Periodo"/>    
+    <property name="Amount" column="Importe"/>
+    <property name="IsPaid" column="Pagado"/>
+    
     <many-to-one name="Partner"
                  column="IdSocio" class="Partner"
                  not-null="true"/>

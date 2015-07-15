@@ -1,4 +1,5 @@
 ﻿using ComandoRadioElectrico.Core;
+using ComandoRadioElectrico.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,16 @@ namespace ComandoRadioElectrico.WinForms
         [STAThread]
         static void Main()
         {
+            //Inicializo el contenedor de implementaciones del Core
+            new ImplementationsContainer().Initialize();
+            //Inicializo el Mapper
+            AutoMapperConfig.RegisterMappings();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            //Inicializo el contenedor de implementaciones del Core
-            new ImplementationsContainer().Initialize();
+            
+    
         }
     }
 }

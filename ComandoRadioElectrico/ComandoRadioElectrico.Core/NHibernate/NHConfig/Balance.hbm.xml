@@ -4,7 +4,7 @@
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
     </id>
-    <property name="DateFrom" column="FechaDesda"/>
+    <property name="DateFrom" column="FechaDesde"/>
     <property name="DateUntil" column="FechaHasta"/>    
     <property name="DateOfRealization" column="FechaRealizacion"/>
     <property name="Description" column="Descripcion"/>

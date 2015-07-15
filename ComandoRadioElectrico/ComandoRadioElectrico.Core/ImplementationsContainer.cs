@@ -1,5 +1,7 @@
 ﻿using ComandoRadioElectrico.Core.Services.Business.Implementation;
 using ComandoRadioElectrico.Core.Services.Business.Interface;
+using ComandoRadioElectrico.Core.Servicios.Aplication.Implementation;
+using ComandoRadioElectrico.Core.Servicios.Aplication.Interface;
 using Microsoft.Practices.Unity;
 
 namespace ComandoRadioElectrico.Core
@@ -23,6 +25,10 @@ namespace ComandoRadioElectrico.Core
  
            //Registros de implementaciones
             iUnityContainer.RegisterType<IPartnerService, PartnerService>();
+            iUnityContainer.RegisterType<IPersonService, PersonService>();
+            iUnityContainer.RegisterType<IDocumentTypeService, DocumentTypeService>();
+            iUnityContainer.RegisterType<IPersonManagementService, PersonManagementService>();
+            
         }
     }                    
 }

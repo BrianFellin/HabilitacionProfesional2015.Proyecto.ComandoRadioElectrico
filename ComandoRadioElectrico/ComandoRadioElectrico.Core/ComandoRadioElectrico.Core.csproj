@@ -65,11 +65,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DocumentTypeDTO.cs" />
+    <Compile Include="DTO\PersonDTO.cs" />
     <Compile Include="NHibernate\Model\Partner.cs" />
     <Compile Include="ImplementationsContainer.cs" />
+    <Compile Include="Services\Aplication\Implementation\DocumentTypeManagementService.cs" />
+    <Compile Include="Services\Aplication\Implementation\PersonManagementService.cs" />
+    <Compile Include="Services\Aplication\Interface\IDocumentTypeManagementService.cs" />
+    <Compile Include="Services\Aplication\Interface\IPersonManagementService.cs" />
     <Compile Include="Services\Business\Implementation\BaseService.cs" />
+    <Compile Include="Services\Business\Implementation\DocumentTypeService.cs" />
+    <Compile Include="Services\Business\Implementation\PersonService.cs" />
+    <Compile Include="Services\Business\Interface\IDocumentTypeService.cs" />
+    <Compile Include="Services\Business\Interface\IPersonService.cs" />
     <Compile Include="Utils\AutoMapperConfig.cs" />
-    <Compile Include="NH.cs" />
     <Compile Include="NHibernate\Model\MoveType.cs" />
     <Compile Include="NHibernate\Model\AccountType.cs" />
     <Compile Include="NHibernate\Model\DailyMove.cs" />
