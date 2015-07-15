@@ -1,18 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ComandoRadioElectrico.Core.NHibernate.Model" assembly="ComandoRadioElectrico.Core">
-  <class name="Person" table="Persona">
+  <class name="Partner" table="Socio">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
     </id>
-    <property name="FirstName" column="Nombre"/>
-    <property name="LastName" column="Apellido"/>    
-    <property name="DocumentNumber" column="NumeroDocumento"/>
-    <property name="Domicile" column="Domicilio"/>
-    <property name="Telephone" column="Telefono"/>
+    <property name="Code" column="Codigo"/>
+    <property name="CollectDomicile" column="DomicilioCobro"/>    
+    <property name="CollectDay" column="DiaCobro"/>
+    <property name="StarDate" column="FechaIngreso"/>
+    <property name="FinishDate" column="FechaBaja"/>
+    <property name="ValueQuota" column="ValorCuota"/>
 
-    <many-to-one name="DocumentType" 
-                 column="IdTipoDocumento" class="DocumentType" 
+    <many-to-one name="Person" 
+                 column="IdPersona" class="Person" 
                  not-null="true"/>
-  
+    
+    <many-to-one name="Officer" 
+                 column="IdCobrador" class="Officer" 
+                 not-null="true"/>
   </class>
 </hibernate-mapping>

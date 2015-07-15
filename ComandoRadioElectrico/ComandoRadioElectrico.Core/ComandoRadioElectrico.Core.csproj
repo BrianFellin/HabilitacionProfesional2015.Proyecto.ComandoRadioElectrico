@@ -95,13 +95,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="NHibernate\NHConfig\Persona.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\Socio.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\TipoDocumento.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\AsientoContable.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\Balance.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\Cobrador.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\Cuota.hbm.xml" />
-    <EmbeddedResource Include="NHibernate\NHConfig\Socio.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\Persona.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\TipoMovimiento.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\TipoCuenta.hbm.xml" />
     <EmbeddedResource Include="NHibernate\NHConfig\CuentaContable.hbm.xml" />
