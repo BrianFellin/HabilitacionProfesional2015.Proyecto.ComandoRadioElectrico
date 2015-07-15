@@ -1,7 +1,7 @@
 ﻿using System;
-using ComandoRadioElectrico.Core1.DTO;
+using ComandoRadioElectrico.Core.DTO;
 
-namespace ComandoRadioElectrico.Core1.Servicios.Aplication.Interface
+namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
 {
     public interface IPartnerManagementService
     {

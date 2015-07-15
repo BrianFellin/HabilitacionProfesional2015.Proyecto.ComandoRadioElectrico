@@ -1,8 +1,8 @@
-﻿using ComandoRadioElectrico.Core1.Servicios.Business.Interface;
+﻿using ComandoRadioElectrico.Core.Servicios.Business.Interface;
 using NHibernate.Cfg;
 using System;
 
-namespace ComandoRadioElectrico.Core1.Servicios.Business.Implementation
+namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
 {
     public abstract class CRUDBaseService<T> : ICRUDBase<T> where T :class
     {

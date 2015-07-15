@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using ComandoRadioElectrico.Core1.DTO;
-using ComandoRadioElectrico.Core1.NHibernate.Model;
-using ComandoRadioElectrico.Core1.Services.Business.Implementation;
-using ComandoRadioElectrico.Core1.Services.Business.Interface;
-using ComandoRadioElectrico.Core1.Servicios.Aplication.Interface;
+using ComandoRadioElectrico.Core.DTO;
+using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Services.Business.Implementation;
+using ComandoRadioElectrico.Core.Services.Business.Interface;
+using ComandoRadioElectrico.Core.Servicios.Aplication.Interface;
 
-namespace ComandoRadioElectrico.Core1.Servicios.Aplication.Implementation
+namespace ComandoRadioElectrico.Core.Servicios.Aplication.Implementation
 {
     public class PartnerManagementService : IPartnerManagementService
     {

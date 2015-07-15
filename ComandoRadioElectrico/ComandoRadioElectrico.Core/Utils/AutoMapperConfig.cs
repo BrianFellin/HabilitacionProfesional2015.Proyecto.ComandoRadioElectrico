@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using ComandoRadioElectrico.Core1.NHibernate.Model;
-using ComandoRadioElectrico.Core1.DTO;
+using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.DTO;
 
-namespace ComandoRadioElectrico.Core1.Utils
+namespace ComandoRadioElectrico.Core.Utils
 {
     public static class AutoMapperConfig
     {

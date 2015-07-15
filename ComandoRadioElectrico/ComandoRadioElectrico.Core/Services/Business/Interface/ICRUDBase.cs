@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComandoRadioElectrico.Core1.Servicios.Business.Interface
+namespace ComandoRadioElectrico.Core.Servicios.Business.Interface
 {
     public interface ICRUDBase<T> where T:class 
     {
