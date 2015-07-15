@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ComandoRadioElectrico.Core.NHibernate.Model" assembly="ComandoRadioElectrico.Core">
-  <class name="Person" table="Persona">
+  <class name="DailyMove" table="MovimientoDiario">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
     </id>
