@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace ComandoRadioElectrico.Core1
+namespace ComandoRadioElectrico.Core1.DTO
 {
-    public class Class1
+    public class PartnerDTO
     {
+        public int Id { get; set; }
     }
 }

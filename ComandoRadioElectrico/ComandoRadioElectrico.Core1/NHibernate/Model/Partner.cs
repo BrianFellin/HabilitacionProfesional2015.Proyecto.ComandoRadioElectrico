@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComandoRadioElectrico.Core1
+namespace ComandoRadioElectrico.Core1.NHibernate.Model
 {
-    class RegisterImplementation
+    public class Partner
     {
-        
     }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComandoRadioElectrico.Core; 
+
 
 namespace ComandoRadioElectrico.WinForms
 {
@@ -15,6 +17,11 @@ namespace ComandoRadioElectrico.WinForms
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
