@@ -78,7 +78,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ComandoRadioElectrico.Core1\ComandoRadioElectrico.Core.csproj">
+    <ProjectReference Include="..\ComandoRadioElectrico.Core\ComandoRadioElectrico.Core.csproj">
       <Project>{15161608-c0d4-4421-b3a4-0dbe36f7f73e}</Project>
       <Name>ComandoRadioElectrico.Core</Name>
     </ProjectReference>

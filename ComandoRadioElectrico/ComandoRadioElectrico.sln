@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComandoRadioElectrico.WinForms", "ComandoRadioElectrico.WinForms\ComandoRadioElectrico.WinForms.csproj", "{BFD1BEDB-E510-40E1-BCF6-B1BDEF6661EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComandoRadioElectrico.Core", "ComandoRadioElectrico.Core1\ComandoRadioElectrico.Core.csproj", "{15161608-C0D4-4421-B3A4-0DBE36F7F73E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComandoRadioElectrico.Core", "ComandoRadioElectrico.Core\ComandoRadioElectrico.Core.csproj", "{15161608-C0D4-4421-B3A4-0DBE36F7F73E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

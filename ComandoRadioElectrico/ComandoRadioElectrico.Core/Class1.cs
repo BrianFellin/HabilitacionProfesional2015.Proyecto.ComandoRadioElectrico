@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComandoRadioElectrico.Core1.NHibernate.Model
+namespace ComandoRadioElectrico.Core
 {
     public class Partner
     {

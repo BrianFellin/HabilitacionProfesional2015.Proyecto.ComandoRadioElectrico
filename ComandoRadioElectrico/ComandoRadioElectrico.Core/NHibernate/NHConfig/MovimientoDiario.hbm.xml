@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ComandoRadioElectrico.Core.NHibernate.Model" assembly="ComandoRadioElectrico.Core">
+  <class name="Person" table="Persona">
+    <id name="Id" type="int" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="Number" column="Numero"/>
+    <property name="Date" column="Fecha"/>    
+    <property name="Amount" column="Importe"/>
+
+    <many-to-one name="MoveType" 
+                 column="IdTipoMovimiento" class="MoveType" 
+                 not-null="true"/>
+    
+    <many-to-one name="AccountantAccount" 
+                 column="IdCuentaContable" class="AccountantAccount" 
+                 not-null="true"/>
+    
+    <many-to-one name="AccountingEntry"
+                 column="IdAsientoContable" class="AccountingEntry"
+                 not-null="true"/>        
+  </class>
+</hibernate-mapping>

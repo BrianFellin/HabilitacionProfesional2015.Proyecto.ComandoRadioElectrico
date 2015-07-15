@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
+  <session-factory>
+    <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
+    <property name="dialect">NHibernate.Dialect.MsSql2005Dialect</property>
+    <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
+    <property name="connection.connection_string">Server=BRIAN-PC\SQLEXPRESS; Database=ComandoRadioElectrico; User ID=sa; Password=fellin25</property>
+
+    <property name="show_sql">true</property>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.AsientoContable.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.Balance.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.Cobrador.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.CuentaContable.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.Cuota.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.MovimientoDiario.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.Persona.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.Socio.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.TipoCuenta.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.TipoDocumento.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.TipoMovimiento.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+  </session-factory>
+</hibernate-configuration>
