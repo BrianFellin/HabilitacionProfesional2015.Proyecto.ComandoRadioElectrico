@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComandoRadioElectrico.Core1
+namespace ComandoRadioElectrico.Core
 {
-    public class Class1
+    class RegisterImplementation
     {
+        
     }
 }

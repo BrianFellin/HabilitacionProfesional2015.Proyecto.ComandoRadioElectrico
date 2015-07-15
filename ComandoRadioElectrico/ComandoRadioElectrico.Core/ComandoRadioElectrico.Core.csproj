@@ -7,10 +7,11 @@
     <ProjectGuid>{15161608-C0D4-4421-B3A4-0DBE36F7F73E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ComandoRadioElectrico.Core1</RootNamespace>
-    <AssemblyName>ComandoRadioElectrico.Core1</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>ComandoRadioElectrico.Core</RootNamespace>
+    <AssemblyName>ComandoRadioElectrico.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,20 +51,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="NH.cs" />
+    <Compile Include="NHibernate\Model\MoveType.cs" />
+    <Compile Include="NHibernate\Model\AccountType.cs" />
+    <Compile Include="NHibernate\Model\DailyMove.cs" />
+    <Compile Include="NHibernate\Model\AccountantAccount.cs" />
+    <Compile Include="NHibernate\Model\Partner.cs" />
+    <Compile Include="NHibernate\Model\Quota.cs" />
+    <Compile Include="NHibernate\Model\Officer.cs" />
+    <Compile Include="NHibernate\Model\Balance.cs" />
+    <Compile Include="NHibernate\Model\AccountingEntry.cs" />
+    <Compile Include="NHibernate\Model\DocumentType.cs" />
+    <Compile Include="NHibernate\Model\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="NHibernate\Model\" />
-    <Folder Include="NHibernate\NHConfig\" />
+    <Content Include="NHibernate\Hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NHibernate\Hibernate.cfg.xml" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="NHibernate\NHConfig\Persona.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\TipoDocumento.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\AsientoContable.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\Balance.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\Cobrador.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\Cuota.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\Socio.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\TipoMovimiento.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\TipoCuenta.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\CuentaContable.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\NHConfig\MovimientoDiario.hbm.xml" />
     <Content Include="ScriptBaseDeDatos\ComandoRadioElectrico.sql" />
     <Content Include="ScriptBaseDeDatos\InsertarDatosComandoRadioElectrico.sql" />
   </ItemGroup>
