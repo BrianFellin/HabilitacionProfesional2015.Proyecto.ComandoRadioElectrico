@@ -44,8 +44,8 @@ namespace ComandoRadioElectrico.WinForms
                 Telephone = "asdasd"
             };
 
-            PersonService mPersonService = new PersonService();
-            mPersonService.CreatePerson(mPerson);
+            //PersonService mPersonService = new PersonService();
+            //mPersonService.CreatePerson(mPerson);
                         
 
             

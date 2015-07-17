@@ -4,40 +4,40 @@ using System.Collections.Generic;
 
 namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
 {
-    public interface IPartnerManagementService
+    public interface IOfficerManagementService
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pPartnerId"></param>
+        /// <param name="pOfficerId"></param>
         /// <returns></returns>
-        PartnerDTO GetPartner(int pPartnerId);
+        OfficerDTO GetOfficer(int pOfficerId);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pPartnerToCreate"></param>
+        /// <param name="pOfficerToCreate"></param>
         /// <returns></returns>
-        PartnerDTO CreatePartner(PartnerDTO pPartnerToCreate);
+        OfficerDTO CreateOfficer(OfficerDTO pOfficerToCreate);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pPartnerToUpdate"></param>
+        /// <param name="pOfficerToUpdate"></param>
         /// <returns></returns>
-        PartnerDTO UpdatePartner(PartnerDTO pPartnerToUpdate);
+        OfficerDTO UpdateOfficer(OfficerDTO pOfficerToUpdate);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pPartnerToDelete"></param>
-        void DeletePartner(DeletedEntityDTO pPartnerToDelete);
+        /// <param name="pOfficerToDelete"></param>
+        void DeleteOfficer(DeletedEntityDTO pOfficerToDelete);
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        IList<PartnerDTO> GetAll();
+        IList<OfficerDTO> GetAll();
 
     }
 }

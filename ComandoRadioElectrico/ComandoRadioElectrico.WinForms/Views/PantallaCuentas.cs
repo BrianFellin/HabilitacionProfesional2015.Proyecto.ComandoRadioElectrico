@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pantallas
+namespace ComandoRadioElectrico.WinForms.Views
 {
     public partial class PantallaCuentas : Form
     {

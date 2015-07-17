@@ -16,9 +16,9 @@ namespace ComandoRadioElectrico.Core.NHibernate.Model
         public virtual Officer Officer { get; set; }
         public virtual string Code { get; set; }
         public virtual string CollectDomicile { get; set; }
-        public virtual string CollectDay { get; set; }
+        public virtual DateTime CollectDay { get; set; }
         public virtual DateTime StarDate { get; set; }
         public virtual DateTime FinishDate { get; set; }
-        public virtual float ValueQuota { get; set; }              
+        public virtual double ValueQuota { get; set; }              
     }
 }

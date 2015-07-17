@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pantallas
+namespace ComandoRadioElectrico.WinForms.Views
 {
     public partial class pantallaPrincipal : Form
     {
         public pantallaPrincipal()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

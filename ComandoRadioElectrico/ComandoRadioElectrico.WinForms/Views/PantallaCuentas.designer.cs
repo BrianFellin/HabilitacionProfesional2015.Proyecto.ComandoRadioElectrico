@@ -1,4 +1,4 @@
-﻿namespace Pantallas
+﻿namespace ComandoRadioElectrico.WinForms.Views
 {
     partial class PantallaCuentas
     {

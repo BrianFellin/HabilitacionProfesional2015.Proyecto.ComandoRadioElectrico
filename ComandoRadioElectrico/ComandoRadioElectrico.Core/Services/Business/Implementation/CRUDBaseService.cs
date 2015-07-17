@@ -1,6 +1,7 @@
 ﻿using ComandoRadioElectrico.Core.Servicios.Business.Interface;
 using NHibernate.Cfg;
 using System;
+using System.Collections.Generic;
 
 namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
 {
@@ -46,6 +47,15 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
             var sessionFactory = hibernateConfiguration.BuildSessionFactory();
             var mSession = sessionFactory.OpenSession();
             return mSession.Get<T>(pEntityId);                                
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            var hibernateConfiguration = new Configuration().Configure();
+            var sessionFactory = hibernateConfiguration.BuildSessionFactory();
+            var mSession = sessionFactory.OpenSession();
+            var a = mSession.QueryOver<T>().List();
+            return a;
         }
 
     }

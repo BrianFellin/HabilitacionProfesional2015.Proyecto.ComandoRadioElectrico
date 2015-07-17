@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComandoRadioElectrico.WinForms.Views;
 
-namespace ComandoRadioElectrico.WinForms
+namespace ComandoRadioElectrico.WinForms.Views
 {
     static class Program
     {
@@ -23,7 +24,7 @@ namespace ComandoRadioElectrico.WinForms
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PantallaSocios());
             
     
         }

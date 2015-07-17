@@ -4,6 +4,8 @@ using ComandoRadioElectrico.Core.NHibernate.Model;
 using ComandoRadioElectrico.Core.Services.Business.Implementation;
 using ComandoRadioElectrico.Core.Services.Business.Interface;
 using ComandoRadioElectrico.Core.Servicios.Aplication.Interface;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ComandoRadioElectrico.Core.Servicios.Aplication.Implementation
 {
@@ -36,6 +38,14 @@ namespace ComandoRadioElectrico.Core.Servicios.Aplication.Implementation
         public void DeleteDocumentType(DeletedEntityDTO pDocumentTypeToDelete)
         {
             throw new System.NotImplementedException();
+        }
+
+
+        public IList<DocumentTypeDTO> GetAll()
+        {
+            // obtencion del servicio de tipo de documento
+            IDocumentTypeService mDocumentTypeService = this.Resolve<IDocumentTypeService>();
+            return Mapper.Map<IList<DocumentType>, IList<DocumentTypeDTO>>(mDocumentTypeService.GetAll().ToList());            
         }
     }
 }

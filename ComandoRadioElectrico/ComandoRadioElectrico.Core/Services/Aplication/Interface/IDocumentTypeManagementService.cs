@@ -1,5 +1,6 @@
 ﻿using System;
 using ComandoRadioElectrico.Core.DTO;
+using System.Collections.Generic;
 
 namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
 {
@@ -31,6 +32,8 @@ namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
         /// </summary>
         /// <param name="pDocumentTypeToDelete"></param>
         void DeleteDocumentType(DeletedEntityDTO pDocumentTypeToDelete);
+
+        IList<DocumentTypeDTO> GetAll();
 
     }
 }
