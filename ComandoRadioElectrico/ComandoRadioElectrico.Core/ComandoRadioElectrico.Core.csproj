@@ -31,10 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper.Net4">
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
@@ -65,20 +67,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AccountTypeDTO.cs" />
     <Compile Include="DTO\DocumentTypeDTO.cs" />
+    <Compile Include="DTO\AccountantAccountDTO.cs" />
     <Compile Include="DTO\PersonDTO.cs" />
+    <Compile Include="Exceptions\AccountantAccountException.cs" />
+    <Compile Include="Exceptions\DataFieldException.cs" />
+    <Compile Include="Exceptions\DataBaseException.cs" />
     <Compile Include="NHibernate\Model\Partner.cs" />
-    <Compile Include="ImplementationsContainer.cs" />
+    <Compile Include="CoreServerModuleImpl.cs" />
+    <Compile Include="Services\Aplication\Implementation\AccountTypeManagementService.cs" />
     <Compile Include="Services\Aplication\Implementation\DocumentTypeManagementService.cs" />
+    <Compile Include="Services\Aplication\Implementation\AccountantAccountManagementService.cs" />
     <Compile Include="Services\Aplication\Implementation\PersonManagementService.cs" />
+    <Compile Include="Services\Aplication\Interface\IAccountTypeManagementService.cs" />
     <Compile Include="Services\Aplication\Interface\IDocumentTypeManagementService.cs" />
+    <Compile Include="Services\Aplication\Interface\IAccountantAccountManagementService.cs" />
     <Compile Include="Services\Aplication\Interface\IPersonManagementService.cs" />
+    <Compile Include="Services\Business\Implementation\AccountTypeService.cs" />
     <Compile Include="Services\Business\Implementation\BaseService.cs" />
     <Compile Include="Services\Business\Implementation\DocumentTypeService.cs" />
+    <Compile Include="Services\Business\Implementation\AccountantAccountService.cs" />
     <Compile Include="Services\Business\Implementation\PersonService.cs" />
+    <Compile Include="Services\Business\Interface\IAccountTypeService.cs" />
     <Compile Include="Services\Business\Interface\IDocumentTypeService.cs" />
+    <Compile Include="Services\Business\Interface\IAccountantAccountService.cs" />
     <Compile Include="Services\Business\Interface\IPersonService.cs" />
-    <Compile Include="Utils\AutoMapperConfig.cs" />
+    <Compile Include="Utils\MappingHelper.cs" />
     <Compile Include="NHibernate\Model\MoveType.cs" />
     <Compile Include="NHibernate\Model\AccountType.cs" />
     <Compile Include="NHibernate\Model\DailyMove.cs" />
@@ -120,6 +135,7 @@
     <Content Include="ScriptBaseDeDatos\InsertarDatosComandoRadioElectrico.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
