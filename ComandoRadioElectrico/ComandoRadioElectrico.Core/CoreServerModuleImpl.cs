@@ -1,7 +1,6 @@
-﻿using ComandoRadioElectrico.Core.Services.Business.Implementation;
-using ComandoRadioElectrico.Core.Services.Business.Interface;
-using ComandoRadioElectrico.Core.Servicios.Aplication.Implementation;
-using ComandoRadioElectrico.Core.Servicios.Aplication.Interface;
+﻿using ComandoRadioElectrico.Core.DAO;
+using ComandoRadioElectrico.Core.Services.Implementations;
+using ComandoRadioElectrico.Core.Services.Interfaces;
 using ComandoRadioElectrico.Core.Utils;
 using Microsoft.Practices.Unity;
 
@@ -23,20 +22,16 @@ namespace ComandoRadioElectrico.Core
         }
         private static void Configure()
         {
-            #region Servicios de aplicacion                     
-            iUnityContainer.RegisterType<IPersonManagementService, PersonManagementService>();
-            iUnityContainer.RegisterType<IAccountantAccountManagementService, AccountantAccountManagementService>();
-            iUnityContainer.RegisterType<IDocumentTypeManagementService, DocumentTypeManagementService>();
-            iUnityContainer.RegisterType<IAccountTypeManagementService, AccountTypeManagementService>();            
-            #endregion
-
-            #region Servicios internos
-            iUnityContainer.RegisterType<IPartnerService, PartnerService>();
-            iUnityContainer.RegisterType<IPersonService, PersonService>();
-            iUnityContainer.RegisterType<IDocumentTypeService, DocumentTypeService>();
+            #region Servicios      
             iUnityContainer.RegisterType<IAccountantAccountService, AccountantAccountService>();
             iUnityContainer.RegisterType<IAccountTypeService, AccountTypeService>();
-            
+            //iUnityContainer.RegisterType<IDocumentTypeService, DocumentTypeService>();
+            #endregion
+
+            #region Servicios DAO
+            iUnityContainer.RegisterType<IAccountTypeDAO, AccountTypeDAO>();
+            iUnityContainer.RegisterType<IAccountantAccountDAO, AccountantAccountDAO>();
+
             #endregion
 
             #region Otros servicios

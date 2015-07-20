@@ -1,8 +1,11 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
-namespace ComandoRadioElectrico.Core.Servicios.Business.Interface
+using System.Linq;
+using System.Text;
+
+namespace ComandoRadioElectrico.Core.DAO.DAOBase
 {
-    public interface ICRUDBase<T> where T:class 
+    public interface IDAOBase<T> where T:class 
     {
         /// <summary>
         /// 
@@ -16,7 +19,7 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Interface
         /// </summary>
         /// <param name="pEntity"></param>
         /// <returns></returns>
-        T Create(T pEntity);
+        void Create(T pEntity);
 
         /// <summary>
         /// 
@@ -35,7 +38,5 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Interface
         /// </summary>
         /// <returns></returns>
         IEnumerable<T> GetAll();
-   
-
     }
 }

@@ -1,10 +1,12 @@
-﻿using System;
-using ComandoRadioElectrico.Core.DTO;
+﻿using ComandoRadioElectrico.Core.DTO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
+namespace ComandoRadioElectrico.Core.Services.Interfaces
 {
-    public interface IAccountTypeManagementService
+    public interface IAccountTypeService
     {
         /// <summary>
         /// 
@@ -25,20 +27,19 @@ namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
         /// </summary>
         /// <param name="pAccountTypeToCreate"></param>
         /// <returns></returns>
-        AccountTypeDTO CreateAccountType(AccountTypeDTO pAccountTypeToCreate);
+        void CreateAccountType(AccountTypeDTO pAccountTypeToCreate);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pAccountTypeToUpdate"></param>
         /// <returns></returns>
-        AccountTypeDTO UpdateAccountType(AccountTypeDTO pAccountTypeToUpdate);
+        void UpdateAccountType(AccountTypeDTO pAccountTypeToUpdate);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pAccountTypeToDelete"></param>
         void DeleteAccountType(DeletedEntityDTO pAccountTypeToDelete);
-
     }
 }

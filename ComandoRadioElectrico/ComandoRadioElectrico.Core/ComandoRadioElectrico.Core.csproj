@@ -67,32 +67,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseService.cs" />
+    <Compile Include="DAO\AccountantAccountDAO.cs" />
+    <Compile Include="DAO\AccountTypeDAO.cs" />
+    <Compile Include="DAO\DAOBase\DAOBase.cs" />
+    <Compile Include="DAO\DAOBase\IDAOBase.cs" />
+    <Compile Include="DAO\IAccountantAccountDAO.cs" />
+    <Compile Include="DAO\IAccountTypeDAO.cs" />
     <Compile Include="DTO\AccountTypeDTO.cs" />
     <Compile Include="DTO\DocumentTypeDTO.cs" />
     <Compile Include="DTO\AccountantAccountDTO.cs" />
     <Compile Include="DTO\PersonDTO.cs" />
-    <Compile Include="Exceptions\AccountantAccountException.cs" />
-    <Compile Include="Exceptions\DataFieldException.cs" />
+    <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\DataBaseException.cs" />
     <Compile Include="NHibernate\Model\Partner.cs" />
     <Compile Include="CoreServerModuleImpl.cs" />
-    <Compile Include="Services\Aplication\Implementation\AccountTypeManagementService.cs" />
-    <Compile Include="Services\Aplication\Implementation\DocumentTypeManagementService.cs" />
-    <Compile Include="Services\Aplication\Implementation\AccountantAccountManagementService.cs" />
-    <Compile Include="Services\Aplication\Implementation\PersonManagementService.cs" />
-    <Compile Include="Services\Aplication\Interface\IAccountTypeManagementService.cs" />
-    <Compile Include="Services\Aplication\Interface\IDocumentTypeManagementService.cs" />
-    <Compile Include="Services\Aplication\Interface\IAccountantAccountManagementService.cs" />
-    <Compile Include="Services\Aplication\Interface\IPersonManagementService.cs" />
-    <Compile Include="Services\Business\Implementation\AccountTypeService.cs" />
-    <Compile Include="Services\Business\Implementation\BaseService.cs" />
-    <Compile Include="Services\Business\Implementation\DocumentTypeService.cs" />
-    <Compile Include="Services\Business\Implementation\AccountantAccountService.cs" />
-    <Compile Include="Services\Business\Implementation\PersonService.cs" />
-    <Compile Include="Services\Business\Interface\IAccountTypeService.cs" />
-    <Compile Include="Services\Business\Interface\IDocumentTypeService.cs" />
-    <Compile Include="Services\Business\Interface\IAccountantAccountService.cs" />
-    <Compile Include="Services\Business\Interface\IPersonService.cs" />
+    <Compile Include="Services\Implementations\AccountantAccountService.cs" />
+    <Compile Include="Services\Implementations\AccountTypeService.cs" />
+    <Compile Include="Services\Interfaces\IAccountantAccountService.cs" />
+    <Compile Include="Services\Interfaces\IAccountTypeService.cs" />
     <Compile Include="Utils\MappingHelper.cs" />
     <Compile Include="NHibernate\Model\MoveType.cs" />
     <Compile Include="NHibernate\Model\AccountType.cs" />
@@ -106,13 +99,7 @@
     <Compile Include="NHibernate\Model\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DTO\DeletedEntityDTO.cs" />
-    <Compile Include="Services\Aplication\Interface\IPartnerManagementService.cs" />
     <Compile Include="DTO\PartnerDTO.cs" />
-    <Compile Include="Services\Aplication\Implementation\PartnerManagementService.cs" />
-    <Compile Include="Services\Business\Implementation\CRUDBaseService.cs" />
-    <Compile Include="Services\Business\Interface\ICRUDBase.cs" />
-    <Compile Include="Services\Business\Interface\IPartnerService.cs" />
-    <Compile Include="Services\Business\Implementation\PartnerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

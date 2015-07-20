@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ComandoRadioElectrico.Core.Services.Business.Implementation
+namespace ComandoRadioElectrico.Core
 {
-    public abstract class BaseService
+    public class BaseService
     {
+
         public T Resolve<T>()
         {
             return CoreServerModuleImpl.UnityContainer.Resolve<T>();

@@ -1,14 +1,15 @@
-﻿using ComandoRadioElectrico.Core.Servicios.Business.Interface;
-using NHibernate.Cfg;
+﻿using NHibernate.Cfg;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
+namespace ComandoRadioElectrico.Core.DAO.DAOBase
 {
-    public abstract class CRUDBaseService<T> : ICRUDBase<T> where T :class
+    public class DAOBase<T> : IDAOBase<T> where T:class
     {
-        public virtual T Create(T pEntity)
-        {            
+        public void Create(T pEntity)
+        {
             var mHibernateConfiguration = new Configuration().Configure();
             var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
             var mSession = mSessionFactory.OpenSession();
@@ -16,10 +17,9 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
             mSession.Save(pEntity);
             mTx.Commit();
             mSession.Close();
-            return pEntity;                        
         }
 
-        public virtual void Update(T pEntity)
+        public void Update(T pEntity)
         {
             var mHibernateConfiguration = new Configuration().Configure();
             var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
@@ -30,8 +30,8 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
             mSession.Close();
         }
 
-        public virtual void Delete(int pEntityId)
-        {            
+        public void Delete(int pEntityId)
+        {
             var mHibernateConfiguration = new Configuration().Configure();
             var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
             var mSession = mSessionFactory.OpenSession();
@@ -49,7 +49,7 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
             var mSession = sessionFactory.OpenSession();
             T mEntity = mSession.Get<T>(pEntityId);
             mSession.Close();
-            return mEntity;                                
+            return mEntity;
         }
 
         public IEnumerable<T> GetAll()
@@ -58,10 +58,8 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Implementation
             var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
             var mSession = mSessionFactory.OpenSession();
             IEnumerable<T> mList = mSession.QueryOver<T>().List();
-            
+            mSession.Close();
             return mList;
         }
-
     }
 }
-
