@@ -6,6 +6,8 @@ using ComandoRadioElectrico.Core.DTO;
 using ComandoRadioElectrico.WinForms.Adapter;
 using System.Linq;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
+using ComandoRadioElectrico.Core.Exceptions;
 
 namespace ComandoRadioElectrico.WinForms.Views
 {
@@ -36,10 +38,30 @@ namespace ComandoRadioElectrico.WinForms.Views
                 mListaRelleno.Add(new OfficerComboBoxAdapter
                 {
                     Id = officer.Id,
-                    FirstName = officer.Person.FirstName                  
+                    FirstName = officer.Person.FirstName
                 });
             }
             cbOfficer.DataSource = mListaRelleno;
+        }
+
+        private void LlenarComboBoxDel()
+        {
+            IList<int> mListaRellenoDel = new List<int>();
+            for (int indice=1; indice<=31; indice++)
+            {
+                mListaRellenoDel.Add(indice);
+            }
+            cbDel.DataSource = mListaRellenoDel;
+        }
+
+        private void LlenarComboBoxAl()
+        {
+            IList<int> mListaRellenoAl = new List<int>();
+            for (int indice = 1; indice <= 31; indice++)
+            {
+                mListaRellenoAl.Add(indice);
+            }
+            cbAl.DataSource = mListaRellenoAl;
         }
 
         /// <summary>
@@ -57,7 +79,7 @@ namespace ComandoRadioElectrico.WinForms.Views
                     FirstName = partner.Person.FirstName,
                     LastName = partner.Person.LastName,
                     Document = partner.Person.DocumentNumber,
-                    Domicile = partner.Person.Domicile                    
+                    Domicile = partner.Person.Domicile
                 });
             }
             DataGridViewSocios.DataSource = mListaRelleno;//.OrderBy(o => o.FirstName).ToList();
@@ -71,8 +93,9 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// <param name="e"></param>
         private void PantallaSocios_Load(object sender, EventArgs e)
         {
-
-            this.LlenarComboBoxTipoDocumento();            
+            this.LlenarComboBoxDel();
+            this.LlenarComboBoxAl();
+            this.LlenarComboBoxTipoDocumento();
             this.LlenarComboBoxCobradores();
             this.CargarDataGridViewSocios();
         }
@@ -84,7 +107,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DataGridViewSocios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {                 
+        {
             if (this.DataGridViewSocios.Columns[e.ColumnIndex].Name.Equals("Seleccionar"))
             {
                 PartnerGridViewAdapter row = (PartnerGridViewAdapter)DataGridViewSocios.CurrentRow.DataBoundItem;
@@ -107,9 +130,9 @@ namespace ComandoRadioElectrico.WinForms.Views
             PartnerDTO mPartner = PartnerService.GetInstance.Get(pIdSocio);
             tbFirstName.Text = mPartner.Person.FirstName;
             tbLastName.Text = mPartner.Person.LastName;
-            tbCollectDay.Text = Convert.ToString(mPartner.CollectDay.Date);
+            //tbCollectDay.Text = Convert.ToString(mPartner.CollectDay.Date);
             tbCollectDomicile.Text = mPartner.CollectDomicile;
-            tbDocumentNamber.Text = mPartner.Person.DocumentNumber;
+            tbDocumentNumber.Text = mPartner.Person.DocumentNumber;
             tbDomicile.Text = mPartner.Person.Domicile;
             tbStartDate.Text = mPartner.StarDate.ToString();
             tbTelephone.Text = mPartner.Person.Telephone;
@@ -126,14 +149,30 @@ namespace ComandoRadioElectrico.WinForms.Views
         {
             tbFirstName.Text = "";
             tbLastName.Text = "";
-            tbCollectDay.Text = "";
+            //tbCollectDay.Text = "";
             tbCollectDomicile.Text = "";
-            tbDocumentNamber.Text = "";
+            tbDocumentNumber.Text = "";
             tbDomicile.Text = "";
             tbStartDate.Text = "";
             tbTelephone.Text = "";
             tbValueQuota.Text = "";
             cbTipoDocumento.SelectedValue = 1;
+            this.CleanErrorElemnts();
+        }
+
+        /// <summary>
+        /// Oculta todos los elementos relacionados con los mensajes de error.
+        /// </summary>
+        private void CleanErrorElemnts()
+        {
+            ValueQuotaError.Visible = false;
+            TelephoneError.Visible = false;
+            CollectDomicileError.Visible = false;
+            DomicileError.Visible = false;
+            DocumentNumberError.Visible = false;
+            LastNameError.Visible = false;
+            FirstNameError.Visible = false;
+            labelMessaError.Visible = false;
         }
 
         /// <summary>
@@ -147,40 +186,108 @@ namespace ComandoRadioElectrico.WinForms.Views
             bUpdate.Enabled = false;
             bCancel.Enabled = false;
             bDelete.Enabled = false;
-            //CleanDatosFilaSeleccionadaDataGridView();
+            CleanDatosFilaSeleccionadaDataGridView();
         }
 
         private void bNew_Click(object sender, EventArgs e)
         {
-            PersonDTO mPerson = new PersonDTO{
+            this.CleanErrorElemnts();                
+            PersonDTO mPerson = new PersonDTO
+            {
                 //OJO ACÁ Id debe obtenerce 
-                Id = 6,
-                FirstName = tbFirstName.Text,
+                //Id = 6,
+                FirstName = tbFirstName.Text.ToString(),
                 LastName = tbLastName.Text,
                 DocumentTypeId = Convert.ToInt32(cbTipoDocumento.SelectedValue),
-                DocumentNumber = tbDocumentNamber.Text,
+                DocumentNumber = tbDocumentNumber.Text,
                 Domicile = tbDomicile.Text,
                 Telephone = tbTelephone.Text
             };
-            OfficerDTO mOfficer = new OfficerDTO{
-                Id=Convert.ToInt32(cbOfficer.SelectedValue)
-            };
-            PartnerDTO mPartner = new PartnerDTO
+            OfficerDTO mOfficer = new OfficerDTO
             {
-                Person = mPerson,
-                Officer = mOfficer,
-                ValueQuota = Convert.ToDouble(tbValueQuota.Text),
-                CollectDay = DateTime.Today.Date,
-                CollectDomicile = tbCollectDomicile.Text,
-                StarDate = DateTime.Today.Date,
-                FinishDate = DateTime.Today.Date
+                Id = Convert.ToInt32(cbOfficer.SelectedValue)
             };
-
-            PartnerService.GetInstance.CreatePartner(mPartner);
-            this.CleanDatosFilaSeleccionadaDataGridView();
-            this.CargarDataGridViewSocios();
+            try
+            {
+                PartnerDTO mPartner = new PartnerDTO
+                {
+                    Person = mPerson,
+                    Officer = mOfficer,
+                    ValueQuota = 12,
+                    CollectDay = DateTime.Today,
+                    CollectDomicile = tbCollectDomicile.Text,
+                    StarDate = DateTime.Today,
+                    FinishDate = DateTime.Today
+                };
+                PartnerService.GetInstance.CreatePartner(mPartner);
+                this.CleanDatosFilaSeleccionadaDataGridView();
+                this.CargarDataGridViewSocios();
+            }
+            catch (DataFieldException exception)
+            {
+                if (tbFirstName.Text == "")
+                {
+                    FirstNameError.Visible = true;
+                }
+                if (tbLastName.Text == "")
+                {
+                    LastNameError.Visible = true;
+                }
+                if (tbDocumentNumber.Text == "")
+                {
+                    DocumentNumberError.Visible = true;
+                }
+                if (tbDomicile.Text == "")
+                {
+                    DomicileError.Visible = true;
+                }
+                if (tbTelephone.Text == "")
+                {
+                    TelephoneError.Visible = true;
+                }
+                if (tbValueQuota.Text == "")
+                {
+                    ValueQuotaError.Visible = true;
+                }
+                labelMessaError.Visible = true;
+                labelMessaError.Text = exception.Message;
+            }
+            catch(NullReferenceException exception)
+            {
+                labelMessaError.Visible = true;
+                labelMessaError.Text = exception.Message;
+            }
+            catch(InvalidFormatException exception)
+            {
+                labelMessaError.Visible = true;
+                if(Regex.IsMatch(tbDocumentNumber.Text, @"\A[0-9]{2}(\.)[0-9]{3}(\.)[0-9]{3}\Z"))
+                {
+                    labelMessaError.Text = "El número de documento no cumple con el formato";
+                }
+                if(Regex.IsMatch(tbTelephone.Text, @"^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$"))
+                {
+                    labelMessaError.Text = "El número de teléfono no cumple con el formato";
+                }
+                if (!Regex.IsMatch(tbValueQuota.Text, @"^(\d+)(\d|\.\d)?\d*$"))
+                {                            
+                    labelMessaError.Text = "El valor de la cuota no cumple con el formato";
+                }
+                else
+                {
+                    labelMessaError.Text = "El valor de la cuota debe ser positivo";
+                }
+            }            
         }
 
-
+        private void cbDel_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int indice = Convert.ToInt32(cbDel.SelectedItem)-1;
+            IList<int> mListaRellenoAl = new List<int>();
+            for (int ind=1; ind<=31; ind++)
+            {
+                mListaRellenoAl.Add(ind);
+            }
+            cbAl.DataSource = mListaRellenoAl.Where(x => x>indice).ToList();
+        }
     }
 }

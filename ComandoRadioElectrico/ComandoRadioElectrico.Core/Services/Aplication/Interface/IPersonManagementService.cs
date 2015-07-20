@@ -32,5 +32,12 @@ namespace ComandoRadioElectrico.Core.Servicios.Aplication.Interface
         /// <param name="pPersonToDelete"></param>
         void DeletePerson(DeletedEntityDTO pPersonToDelete);
 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pDocument"></param>
+        /// <returns></returns>
+        PersonDTO GetPersonForDocument(string pDocument);
     }
 }

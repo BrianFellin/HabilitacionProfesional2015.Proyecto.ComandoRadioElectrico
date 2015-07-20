@@ -10,7 +10,7 @@ namespace ComandoRadioElectrico.Core.Services.Business.Implementation
     {
         public T Resolve<T>()
         {
-            return ImplementationsContainer.UnityContainer.Resolve<T>();
+            return CoreServerModuleImpl.UnityContainer.Resolve<T>();
         }
         
     }

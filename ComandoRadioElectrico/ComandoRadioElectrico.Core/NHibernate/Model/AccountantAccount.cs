@@ -14,6 +14,7 @@ namespace ComandoRadioElectrico.Core.NHibernate.Model
         public virtual int Id { get; set; }
         public virtual string Code { get; set; }
         public virtual string Name { get; set; }
+        public virtual string Description { get; set; }
         public virtual AccountType AccountType { get; set; }
         public virtual float Amount { get; set; }            
     }

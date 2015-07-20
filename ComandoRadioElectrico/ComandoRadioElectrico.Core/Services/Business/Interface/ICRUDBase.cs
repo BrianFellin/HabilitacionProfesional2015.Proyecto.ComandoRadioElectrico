@@ -28,13 +28,14 @@ namespace ComandoRadioElectrico.Core.Servicios.Business.Interface
         /// 
         /// </summary>
         /// <param name="pEntityId"></param>
-        void Delete(int pEntityId);
+        void Delete(int pEntityId);       
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         IEnumerable<T> GetAll();
-        
+   
+
     }
 }

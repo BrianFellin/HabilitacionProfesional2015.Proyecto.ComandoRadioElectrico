@@ -17,11 +17,8 @@ namespace ComandoRadioElectrico.WinForms.Views
         [STAThread]
         static void Main()
         {
-            //Inicializo el contenedor de implementaciones del Core
-            new ImplementationsContainer().Initialize();
-            //Inicializo el Mapper
-            AutoMapperConfig.RegisterMappings();
-
+            //Inicializo el Core
+            CoreServerModuleImpl.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new PantallaSocios());

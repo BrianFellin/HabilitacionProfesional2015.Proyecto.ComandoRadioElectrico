@@ -15,9 +15,25 @@ namespace ComandoRadioElectrico.Core.Servicios.Aplication.Implementation
             // obtencion del servicio de socios
             IPersonService mPersonService = this.Resolve<IPersonService>();            
             Person mPerson = mPersonService.GetById(pPersonId);
-            if (mPerson == null)
-                throw new System.InvalidOperationException(string.Format("Socio no encontrado", pPersonId));
+            //if (mPerson == null)
+              //  throw new System.InvalidOperationException(string.Format("Socio no encontrado", pPersonId));
 
+            return Mapper.Map<PersonDTO>(mPerson);
+        }
+
+        public PersonDTO GetPersonForDocument(string pDocument)
+        {
+
+            // obtencion del servicio de socios
+            IPersonService mPersonService = this.Resolve<IPersonService>();
+            Person mPerson = null;
+            foreach (Person pPerson in mPersonService.GetAll())
+            {
+                if (pPerson.DocumentNumber == pDocument)
+                {
+                    mPerson = pPerson;
+                }
+            }
             return Mapper.Map<PersonDTO>(mPerson);
         }
 

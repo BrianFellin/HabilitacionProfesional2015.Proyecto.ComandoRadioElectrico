@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ComandoRadioElectrico.Core.NHibernate.Model" assembly="ComandoRadioElectrico.Core">
-  <class name="AccountantAccount" table="CuentaContable">
+  <class name="AccountantAccount" table="CuentaContable" lazy="false">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
     </id>
     <property name="Code" column="Codigo"/>
     <property name="Name" column="Nombre"/>    
     <property name="Amount" column="Saldo"/>
+    <property name="Description" column="Descripcion"/>
 
     <many-to-one name="AccountType" 
                  column="IdTipoCuenta" class="AccountType" 
