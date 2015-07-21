@@ -3,13 +3,15 @@
   <class name="Quota" table="Cuota" lazy="false">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
-    </id>    
-    <property name="Period" column="Periodo"/>    
+    </id>           
     <property name="Amount" column="Importe"/>
     <property name="IsPaid" column="Pagado"/>
     
     <many-to-one name="Partner"
                  column="IdSocio" class="Partner"
+                 not-null="true"/>
+    <many-to-one name="Period"
+                 column="IdPeriodo" class="GeneratedPeriod"
                  not-null="true"/>
   </class>
 </hibernate-mapping>

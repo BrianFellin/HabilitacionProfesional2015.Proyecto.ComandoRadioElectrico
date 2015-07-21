@@ -31,6 +31,7 @@ namespace ComandoRadioElectrico.Core
             #region Servicios DAO
             iUnityContainer.RegisterType<IAccountTypeDAO, AccountTypeDAO>();
             iUnityContainer.RegisterType<IAccountantAccountDAO, AccountantAccountDAO>();
+            iUnityContainer.RegisterType<IGeneratedPeriodDAO, GeneratedPeriodDAO>();
 
             #endregion
 

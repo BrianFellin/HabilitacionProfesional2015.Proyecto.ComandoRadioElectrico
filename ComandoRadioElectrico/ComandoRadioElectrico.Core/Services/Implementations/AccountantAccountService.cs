@@ -5,6 +5,7 @@ using ComandoRadioElectrico.Core.DAO;
 using AutoMapper;
 using ComandoRadioElectrico.Core.NHibernate.Model;
 using ComandoRadioElectrico.Core.Exceptions;
+using System.Linq;
 
 namespace ComandoRadioElectrico.Core.Services.Implementations
 {
@@ -44,6 +45,12 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
             //Obtenemos el tipo de cuenta de la cuenta contable
             mNewAccountantAccount.AccountType = this.iAccountTypeDAO.GetById(pAccountantAccountToCreate.AccountTypeId);
 
+            //validamos que el codigo sea unico y no halla otra cuenta con el mismo codigo
+            if ((from a in this.iAccountantAccountDAO.GetAll() where a.Code == pAccountantAccountToCreate.Code select a).Count() > 0)
+            {
+                throw new BusinessException("Ya existe una cuenta con el codigo ingresado, ingrese otro");
+            }
+            
             // persistimos la informacion 
             this.iAccountantAccountDAO.Create(mNewAccountantAccount); 
         }
@@ -75,6 +82,12 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
             {
                mAccountantAccountToUpdate.AccountType = this.iAccountTypeDAO.GetById(pAccountantAccountToUpdate.AccountTypeId);
             }
+            //validamos que el codigo sea unico y no halla otra cuenta con el mismo codigo
+            if ((from a in this.iAccountantAccountDAO.GetAll() where a.Code == pAccountantAccountToUpdate.Code select a).Count() > 0)
+            {
+                throw new BusinessException("Ya existe una cuenta con el codigo ingresado, ingrese otro");
+            }
+
             Mapper.Map<AccountantAccountDTO, AccountantAccount>(pAccountantAccountToUpdate, mAccountantAccountToUpdate);
 
             // actualizamos la entidad

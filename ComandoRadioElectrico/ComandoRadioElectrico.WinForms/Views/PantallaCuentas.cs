@@ -16,8 +16,19 @@ namespace Pantallas
 
         private void PantallaCuentas_Load(object sender, EventArgs e)
         {
-            LoadAccountantAccount();
-            LoadCbAccountType();
+            try
+            {
+                LoadAccountantAccount();
+                LoadCbAccountType();
+            }
+            catch (BusinessException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadAccountantAccount()
@@ -59,7 +70,7 @@ namespace Pantallas
                 LoadAccountantAccount();                
                 CleanScreen();
             }            
-            catch (BusinessException)
+            catch (BusinessException ex)
             {
                 if (tbCode.Text == string.Empty)
                 {
@@ -73,35 +84,55 @@ namespace Pantallas
                     }
                     else
                     {
-                        amountError.Visible = true;
+                        if (tbAmount.Text == string.Empty)
+                        {
+                            amountError.Visible = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
+                    
                 }
             }
             catch (FormatException)
             {
-                if (tbAmount.Text != string.Empty)
-                {
-                    labelError.Visible = true;
-                }
+                labelError.Visible = true;
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void bDelete_Click(object sender, EventArgs e)
         {
-            DialogResult mAnswer = MessageBox.Show("¿Está seguro que desea eliminar dicha cuenta?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (mAnswer == DialogResult.Yes)
+            try
             {
-                DeletedEntityDTO mDeletedEntity = new DeletedEntityDTO
+                DialogResult mAnswer = MessageBox.Show("¿Está seguro que desea eliminar dicha cuenta?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (mAnswer == DialogResult.Yes)
                 {
-                    Id = Convert.ToInt32(tbId.Text)
-                };
+                    DeletedEntityDTO mDeletedEntity = new DeletedEntityDTO
+                    {
+                        Id = Convert.ToInt32(tbId.Text)
+                    };
 
-                AccountantAccountFacade.DeleteAccountantAccount(mDeletedEntity);
+                    AccountantAccountFacade.DeleteAccountantAccount(mDeletedEntity);
 
-                MessageBox.Show("Cuenta eliminada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cuenta eliminada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //Recargo la lista de cuentas contables
-                LoadAccountantAccount();
+                    //Recargo la lista de cuentas contables
+                    LoadAccountantAccount();
+                }
+            }
+            catch (BusinessException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -13,6 +13,11 @@ namespace ComandoRadioElectrico.Core.Exceptions
         public DataBaseException (string pMessage) : base(pMessage)
         {
         }
+
+        public DataBaseException(string pMessage, Exception pException)
+            : base(pMessage,pException)
+        {
+        }
     }
                 
 }

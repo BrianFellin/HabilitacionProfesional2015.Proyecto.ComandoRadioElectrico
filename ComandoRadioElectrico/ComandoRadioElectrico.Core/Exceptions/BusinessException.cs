@@ -14,8 +14,8 @@ namespace ComandoRadioElectrico.Core.Exceptions
         {
         }
 
-        public BusinessException(string pMessage, Exception pExcepcion)
-            : base(pMessage, pExcepcion)
+        public BusinessException(string pMessage, Exception pException)
+            : base(pMessage, pException)
         {
         }
     }
