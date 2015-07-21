@@ -8,6 +8,7 @@ using System.Linq;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using ComandoRadioElectrico.Core.Exceptions;
+using ComandoRadioElectrico.WinForms.Utils;
 
 namespace ComandoRadioElectrico.WinForms.Views
 {
@@ -24,7 +25,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         private void LlenarComboBoxTipoDocumento()
         {
             //Se llamam a la fachada y se completa con la lista de tipos de documentos.
-            cbTipoDocumento.DataSource = DocumentTypeService.GetInstance.GetAll();
+            cbTipoDocumento.DataSource = DocumentTypeFacade.GetAll();
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         private void LlenarComboBoxCobradores()
         {
             IList<OfficerComboBoxAdapter> mListaRelleno = new List<OfficerComboBoxAdapter>();
-            foreach (OfficerDTO officer in OfficerService.GetInstance.GetAllOfficer())
+            foreach (OfficerDTO officer in OfficerFacade.GetAllOfficer())
             {
                 mListaRelleno.Add(new OfficerComboBoxAdapter
                 {
@@ -71,7 +72,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         private void CargarDataGridViewSocios()
         {
             IList<PartnerGridViewAdapter> mListaRelleno = new List<PartnerGridViewAdapter>();
-            foreach (PartnerDTO partner in PartnerService.GetInstance.GetAll())
+            foreach (PartnerDTO partner in PartnerFacade.GetAll())
             {
                 mListaRelleno.Add(new PartnerGridViewAdapter
                 {
@@ -127,12 +128,12 @@ namespace ComandoRadioElectrico.WinForms.Views
             bCancel.Enabled = true;
             bDelete.Enabled = true;
 
-            PartnerDTO mPartner = PartnerService.GetInstance.Get(pIdSocio);
+            PartnerDTO mPartner = PartnerFacade.Get(pIdSocio);
             tbFirstName.Text = mPartner.Person.FirstName;
             tbLastName.Text = mPartner.Person.LastName;
             //tbCollectDay.Text = Convert.ToString(mPartner.CollectDay.Date);
             tbCollectDomicile.Text = mPartner.CollectDomicile;
-            tbDocumentNumber.Text = mPartner.Person.DocumentNumber;
+            mtDocumentNumber.Text = mPartner.Person.DocumentNumber;
             tbDomicile.Text = mPartner.Person.Domicile;
             tbStartDate.Text = mPartner.StarDate.ToString();
             tbTelephone.Text = mPartner.Person.Telephone;
@@ -151,7 +152,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             tbLastName.Text = "";
             //tbCollectDay.Text = "";
             tbCollectDomicile.Text = "";
-            tbDocumentNumber.Text = "";
+            mtDocumentNumber.Text = "";
             tbDomicile.Text = "";
             tbStartDate.Text = "";
             tbTelephone.Text = "";
@@ -173,6 +174,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             LastNameError.Visible = false;
             FirstNameError.Visible = false;
             labelMessaError.Visible = false;
+            CollectDomicileError.Visible = false;
         }
 
         /// <summary>
@@ -191,39 +193,41 @@ namespace ComandoRadioElectrico.WinForms.Views
 
         private void bNew_Click(object sender, EventArgs e)
         {
-            this.CleanErrorElemnts();                
-            PersonDTO mPerson = new PersonDTO
-            {
-                //OJO ACÁ Id debe obtenerce 
-                //Id = 6,
-                FirstName = tbFirstName.Text.ToString(),
-                LastName = tbLastName.Text,
-                DocumentTypeId = Convert.ToInt32(cbTipoDocumento.SelectedValue),
-                DocumentNumber = tbDocumentNumber.Text,
-                Domicile = tbDomicile.Text,
-                Telephone = tbTelephone.Text
-            };
-            OfficerDTO mOfficer = new OfficerDTO
-            {
-                Id = Convert.ToInt32(cbOfficer.SelectedValue)
-            };
             try
-            {
+            { 
+                this.CleanErrorElemnts();                
+                PersonDTO mPerson = new PersonDTO
+                {
+                    //OJO ACÁ Id debe obtenerce 
+                    //Id = 6,
+                    FirstName = tbFirstName.Text.ToString(),
+                    LastName = tbLastName.Text,
+                    DocumentTypeId = Convert.ToInt32(cbTipoDocumento.SelectedValue),
+                    DocumentNumber = mtDocumentNumber.Text,
+                    Domicile = tbDomicile.Text,
+                    Telephone = tbTelephone.Text
+                };
+                OfficerDTO mOfficer = new OfficerDTO
+                {
+                    Id = Convert.ToInt32(cbOfficer.SelectedValue)
+                };
+            
+            
                 PartnerDTO mPartner = new PartnerDTO
                 {
                     Person = mPerson,
                     Officer = mOfficer,
-                    ValueQuota = 12,
+                    ValueQuota = Convert.ToSingle(tbValueQuota.Text),
                     CollectDay = DateTime.Today,
                     CollectDomicile = tbCollectDomicile.Text,
                     StarDate = DateTime.Today,
                     FinishDate = DateTime.Today
                 };
-                PartnerService.GetInstance.CreatePartner(mPartner);
+                PartnerFacade.CreatePartner(mPartner);
                 this.CleanDatosFilaSeleccionadaDataGridView();
                 this.CargarDataGridViewSocios();
             }
-            catch (DataFieldException exception)
+            catch (BusinessException exception)
             {
                 if (tbFirstName.Text == "")
                 {
@@ -233,7 +237,18 @@ namespace ComandoRadioElectrico.WinForms.Views
                 {
                     LastNameError.Visible = true;
                 }
-                if (tbDocumentNumber.Text == "")
+                if (mtDocumentNumber.Text.Length == 10)
+                {
+                    for (int indice = 0; indice < mtDocumentNumber.Text.Length; indice++)
+                    {
+                        if (mtDocumentNumber.Text[indice] == ' ')
+                        {
+                            DocumentNumberError.Visible = true;
+                            indice = mtDocumentNumber.Text.Length;
+                        }
+                    }
+                }
+                else
                 {
                     DocumentNumberError.Visible = true;
                 }
@@ -249,33 +264,27 @@ namespace ComandoRadioElectrico.WinForms.Views
                 {
                     ValueQuotaError.Visible = true;
                 }
+                if (tbCollectDomicile.Text == "")
+                {
+                    CollectDomicileError.Visible = true;
+                }
                 labelMessaError.Visible = true;
                 labelMessaError.Text = exception.Message;
             }
-            catch(NullReferenceException exception)
+            catch (NullReferenceException exception)
             {
                 labelMessaError.Visible = true;
                 labelMessaError.Text = exception.Message;
             }
-            catch(InvalidFormatException exception)
+            catch (FormatException)
             {
                 labelMessaError.Visible = true;
-                if(Regex.IsMatch(tbDocumentNumber.Text, @"\A[0-9]{2}(\.)[0-9]{3}(\.)[0-9]{3}\Z"))
-                {
-                    labelMessaError.Text = "El número de documento no cumple con el formato";
-                }
-                if(Regex.IsMatch(tbTelephone.Text, @"^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$"))
-                {
-                    labelMessaError.Text = "El número de teléfono no cumple con el formato";
-                }
-                if (!Regex.IsMatch(tbValueQuota.Text, @"^(\d+)(\d|\.\d)?\d*$"))
-                {                            
-                    labelMessaError.Text = "El valor de la cuota no cumple con el formato";
-                }
-                else
-                {
-                    labelMessaError.Text = "El valor de la cuota debe ser positivo";
-                }
+                labelMessaError.Text = "El formato ingresado es invalidoa";
+            }
+            catch (InvalidFormatException exception)
+            {
+                labelMessaError.Visible = true;
+                labelMessaError.Text = exception.Message;
             }            
         }
 
@@ -288,6 +297,28 @@ namespace ComandoRadioElectrico.WinForms.Views
                 mListaRellenoAl.Add(ind);
             }
             cbAl.DataSource = mListaRellenoAl.Where(x => x>indice).ToList();
+        }
+
+        private void tbValueQuota_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if ((e.KeyChar == (',') || e.KeyChar == ('.')) && tbValueQuota.Text.Contains('.'))
+            //{
+            //    var a = tbValueQuota.Text;
+            //    e.Handled = false;
+                
+            //}
+            //else
+            //{
+            //    var b = tbValueQuota.Text;
+            //    //Valido que solo se ingresen numeros
+               e.Handled = Miscellaneous.ValidateAmount(e);
+                //Si se ingresa "," la cambio por "." ya que los decimales se separan por "."
+               if (e.KeyChar == ('.'))
+                {
+                    e.Handled = true;
+                   SendKeys.Send(",");
+                }
+            //}
         }
     }
 }

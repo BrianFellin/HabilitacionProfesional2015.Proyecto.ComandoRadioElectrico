@@ -4,7 +4,7 @@
     <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
     <property name="dialect">NHibernate.Dialect.MsSql2005Dialect</property>
     <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
-    <property name="connection.connection_string">Server=BRIAN-PC\SQLEXPRESS; Database=ComandoRadioElectrico; User ID=sa; Password=fellin25</property>
+    <property name="connection.connection_string">Server=BRIAN-PC\SQLEXPRESS; Database=ComandoRadioElectrico; Integrated Security=SSPI</property>
 
     <property name="show_sql">true</property>
     <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.AsientoContable.hbm.xml" assembly="ComandoRadioElectrico.Core"/>

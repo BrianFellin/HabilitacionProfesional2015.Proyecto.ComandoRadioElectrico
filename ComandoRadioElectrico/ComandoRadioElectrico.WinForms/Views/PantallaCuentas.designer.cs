@@ -44,12 +44,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgAccountantAccount = new System.Windows.Forms.DataGridView();
-            this.cbAccountType = new System.Windows.Forms.ComboBox();
-            this.tbId = new System.Windows.Forms.TextBox();
-            this.labelError = new System.Windows.Forms.Label();
-            this.codeError = new System.Windows.Forms.PictureBox();
-            this.nameError = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,10 +52,16 @@
             this.IdAccountType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Selection = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cbAccountType = new System.Windows.Forms.ComboBox();
+            this.tbId = new System.Windows.Forms.TextBox();
+            this.labelError = new System.Windows.Forms.Label();
+            this.codeError = new System.Windows.Forms.PictureBox();
+            this.nameError = new System.Windows.Forms.PictureBox();
+            this.amountError = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccountantAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.codeError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameError)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountError)).BeginInit();
             this.SuspendLayout();
             // 
             // bCancel
@@ -117,6 +117,7 @@
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.Size = new System.Drawing.Size(235, 20);
             this.tbAmount.TabIndex = 5;
+            this.tbAmount.Text = "0";
             this.tbAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAmount_KeyPress);
             // 
             // tbDescription
@@ -208,69 +209,6 @@
             this.dgAccountantAccount.TabStop = false;
             this.dgAccountantAccount.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAccountantAccount_CellContentClick);
             // 
-            // cbAccountType
-            // 
-            this.cbAccountType.DisplayMember = "Type";
-            this.cbAccountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAccountType.FormattingEnabled = true;
-            this.cbAccountType.Location = new System.Drawing.Point(432, 27);
-            this.cbAccountType.Name = "cbAccountType";
-            this.cbAccountType.Size = new System.Drawing.Size(235, 21);
-            this.cbAccountType.TabIndex = 4;
-            this.cbAccountType.ValueMember = "Id";
-            // 
-            // tbId
-            // 
-            this.tbId.Location = new System.Drawing.Point(81, 3);
-            this.tbId.Name = "tbId";
-            this.tbId.Size = new System.Drawing.Size(31, 20);
-            this.tbId.TabIndex = 60;
-            this.tbId.TabStop = false;
-            this.tbId.Visible = false;
-            // 
-            // labelError
-            // 
-            this.labelError.AutoSize = true;
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(429, 79);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(35, 13);
-            this.labelError.TabIndex = 61;
-            this.labelError.Text = "label1";
-            this.labelError.Visible = false;
-            // 
-            // codeError
-            // 
-            this.codeError.Image = global::ComandoRadioElectrico.WinForms.Properties.Resources.iconoAdvertencia;
-            this.codeError.Location = new System.Drawing.Point(322, 31);
-            this.codeError.Name = "codeError";
-            this.codeError.Size = new System.Drawing.Size(18, 18);
-            this.codeError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.codeError.TabIndex = 63;
-            this.codeError.TabStop = false;
-            this.codeError.Visible = false;
-            // 
-            // nameError
-            // 
-            this.nameError.Image = global::ComandoRadioElectrico.WinForms.Properties.Resources.iconoAdvertencia;
-            this.nameError.Location = new System.Drawing.Point(322, 54);
-            this.nameError.Name = "nameError";
-            this.nameError.Size = new System.Drawing.Size(18, 18);
-            this.nameError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.nameError.TabIndex = 65;
-            this.nameError.TabStop = false;
-            this.nameError.Visible = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::ComandoRadioElectrico.WinForms.Properties.Resources.iconoAdvertencia;
-            this.pictureBox3.Location = new System.Drawing.Point(673, 56);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(18, 18);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 66;
-            this.pictureBox3.TabStop = false;
-            // 
             // Code
             // 
             this.Code.DataPropertyName = "Code";
@@ -333,12 +271,76 @@
             this.Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Selection.Text = "";
             // 
+            // cbAccountType
+            // 
+            this.cbAccountType.DisplayMember = "Type";
+            this.cbAccountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAccountType.FormattingEnabled = true;
+            this.cbAccountType.Location = new System.Drawing.Point(432, 27);
+            this.cbAccountType.Name = "cbAccountType";
+            this.cbAccountType.Size = new System.Drawing.Size(235, 21);
+            this.cbAccountType.TabIndex = 4;
+            this.cbAccountType.ValueMember = "Id";
+            // 
+            // tbId
+            // 
+            this.tbId.Location = new System.Drawing.Point(81, 3);
+            this.tbId.Name = "tbId";
+            this.tbId.Size = new System.Drawing.Size(31, 20);
+            this.tbId.TabIndex = 60;
+            this.tbId.TabStop = false;
+            this.tbId.Visible = false;
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(429, 79);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(144, 13);
+            this.labelError.TabIndex = 61;
+            this.labelError.Text = "Formato ingresado incorrecto";
+            this.labelError.Visible = false;
+            // 
+            // codeError
+            // 
+            this.codeError.Image = global::ComandoRadioElectrico.WinForms.Properties.Resources.iconoAdvertencia;
+            this.codeError.Location = new System.Drawing.Point(322, 31);
+            this.codeError.Name = "codeError";
+            this.codeError.Size = new System.Drawing.Size(18, 18);
+            this.codeError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.codeError.TabIndex = 63;
+            this.codeError.TabStop = false;
+            this.codeError.Visible = false;
+            // 
+            // nameError
+            // 
+            this.nameError.Image = global::ComandoRadioElectrico.WinForms.Properties.Resources.iconoAdvertencia;
+            this.nameError.Location = new System.Drawing.Point(322, 54);
+            this.nameError.Name = "nameError";
+            this.nameError.Size = new System.Drawing.Size(18, 18);
+            this.nameError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.nameError.TabIndex = 65;
+            this.nameError.TabStop = false;
+            this.nameError.Visible = false;
+            // 
+            // amountError
+            // 
+            this.amountError.Image = global::ComandoRadioElectrico.WinForms.Properties.Resources.iconoAdvertencia;
+            this.amountError.Location = new System.Drawing.Point(673, 56);
+            this.amountError.Name = "amountError";
+            this.amountError.Size = new System.Drawing.Size(18, 18);
+            this.amountError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.amountError.TabIndex = 66;
+            this.amountError.TabStop = false;
+            this.amountError.Visible = false;
+            // 
             // PantallaCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 381);
-            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.amountError);
             this.Controls.Add(this.nameError);
             this.Controls.Add(this.codeError);
             this.Controls.Add(this.labelError);
@@ -365,7 +367,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgAccountantAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.codeError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameError)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -392,7 +394,7 @@
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.PictureBox codeError;
         private System.Windows.Forms.PictureBox nameError;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox amountError;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn Names;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;

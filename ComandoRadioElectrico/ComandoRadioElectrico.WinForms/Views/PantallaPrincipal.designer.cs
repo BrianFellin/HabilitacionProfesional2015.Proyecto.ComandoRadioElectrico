@@ -33,6 +33,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestiosDeSociosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +61,8 @@
             // administraciónToolStripMenuItem
             // 
             this.administraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gestiosDeSociosToolStripMenuItem});
+            this.gestiosDeSociosToolStripMenuItem,
+            this.gestionDeCuentasToolStripMenuItem});
             this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
             this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administraciónToolStripMenuItem.Text = "Administración";
@@ -68,8 +70,16 @@
             // gestiosDeSociosToolStripMenuItem
             // 
             this.gestiosDeSociosToolStripMenuItem.Name = "gestiosDeSociosToolStripMenuItem";
-            this.gestiosDeSociosToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.gestiosDeSociosToolStripMenuItem.Text = "Gestios de Socios";
+            this.gestiosDeSociosToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.gestiosDeSociosToolStripMenuItem.Text = "Gestion de Socios";
+            this.gestiosDeSociosToolStripMenuItem.Click += new System.EventHandler(this.gestiosDeSociosToolStripMenuItem_Click);
+            // 
+            // gestionDeCuentasToolStripMenuItem
+            // 
+            this.gestionDeCuentasToolStripMenuItem.Name = "gestionDeCuentasToolStripMenuItem";
+            this.gestionDeCuentasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.gestionDeCuentasToolStripMenuItem.Text = "Gestion de Cuentas";
+            this.gestionDeCuentasToolStripMenuItem.Click += new System.EventHandler(this.gestionDeCuentasToolStripMenuItem_Click);
             // 
             // pantallaPrincipal
             // 
@@ -96,6 +106,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem administraciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestiosDeSociosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionDeCuentasToolStripMenuItem;
     }
 }
 

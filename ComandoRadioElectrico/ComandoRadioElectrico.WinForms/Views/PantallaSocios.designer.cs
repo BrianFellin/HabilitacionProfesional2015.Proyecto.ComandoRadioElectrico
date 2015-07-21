@@ -53,7 +53,6 @@ namespace ComandoRadioElectrico.WinForms.Views
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbCollectDomicile = new System.Windows.Forms.TextBox();
             this.tbDomicile = new System.Windows.Forms.TextBox();
-            this.tbDocumentNumber = new System.Windows.Forms.TextBox();
             this.tbStartDate = new System.Windows.Forms.TextBox();
             this.tbValueQuota = new System.Windows.Forms.TextBox();
             this.tbTelephone = new System.Windows.Forms.TextBox();
@@ -75,6 +74,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             this.LabelAl = new System.Windows.Forms.Label();
             this.labelDel = new System.Windows.Forms.Label();
             this.cbAl = new System.Windows.Forms.ComboBox();
+            this.mtDocumentNumber = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewSocios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FirstNameError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LastNameError)).BeginInit();
@@ -297,13 +297,6 @@ namespace ComandoRadioElectrico.WinForms.Views
             this.tbDomicile.Size = new System.Drawing.Size(235, 20);
             this.tbDomicile.TabIndex = 18;
             // 
-            // tbDocumentNumber
-            // 
-            this.tbDocumentNumber.Location = new System.Drawing.Point(129, 102);
-            this.tbDocumentNumber.Name = "tbDocumentNumber";
-            this.tbDocumentNumber.Size = new System.Drawing.Size(235, 20);
-            this.tbDocumentNumber.TabIndex = 17;
-            // 
             // tbStartDate
             // 
             this.tbStartDate.Location = new System.Drawing.Point(498, 81);
@@ -318,6 +311,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             this.tbValueQuota.Name = "tbValueQuota";
             this.tbValueQuota.Size = new System.Drawing.Size(235, 20);
             this.tbValueQuota.TabIndex = 21;
+            this.tbValueQuota.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValueQuota_KeyPress);
             // 
             // tbTelephone
             // 
@@ -523,11 +517,20 @@ namespace ComandoRadioElectrico.WinForms.Views
             this.cbAl.Size = new System.Drawing.Size(91, 21);
             this.cbAl.TabIndex = 79;
             // 
+            // mtDocumentNumber
+            // 
+            this.mtDocumentNumber.Location = new System.Drawing.Point(129, 102);
+            this.mtDocumentNumber.Mask = "99.999.999";
+            this.mtDocumentNumber.Name = "mtDocumentNumber";
+            this.mtDocumentNumber.Size = new System.Drawing.Size(235, 20);
+            this.mtDocumentNumber.TabIndex = 80;
+            // 
             // PantallaSocios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 503);
+            this.Controls.Add(this.mtDocumentNumber);
             this.Controls.Add(this.cbAl);
             this.Controls.Add(this.labelDel);
             this.Controls.Add(this.LabelAl);
@@ -552,7 +555,6 @@ namespace ComandoRadioElectrico.WinForms.Views
             this.Controls.Add(this.tbTelephone);
             this.Controls.Add(this.tbCollectDomicile);
             this.Controls.Add(this.tbDomicile);
-            this.Controls.Add(this.tbDocumentNumber);
             this.Controls.Add(this.tbLastName);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.tbFirstName);
@@ -601,7 +603,6 @@ namespace ComandoRadioElectrico.WinForms.Views
         private System.Windows.Forms.TextBox tbLastName;
         private System.Windows.Forms.TextBox tbCollectDomicile;
         private System.Windows.Forms.TextBox tbDomicile;
-        private System.Windows.Forms.TextBox tbDocumentNumber;
         private System.Windows.Forms.TextBox tbStartDate;
         private System.Windows.Forms.TextBox tbValueQuota;
         private System.Windows.Forms.TextBox tbTelephone;
@@ -629,5 +630,6 @@ namespace ComandoRadioElectrico.WinForms.Views
         private Label LabelAl;
         private Label labelDel;
         private ComboBox cbAl;
+        private MaskedTextBox mtDocumentNumber;
     }
 }

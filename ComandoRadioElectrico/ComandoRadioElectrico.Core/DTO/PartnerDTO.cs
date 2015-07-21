@@ -15,6 +15,6 @@ namespace ComandoRadioElectrico.Core.DTO
         public DateTime CollectDay { get; set; }
         public DateTime StarDate { get; set; }
         public DateTime FinishDate { get; set; }
-        public double ValueQuota { get; set; } 
+        public float ValueQuota { get; set; } 
     }
 }

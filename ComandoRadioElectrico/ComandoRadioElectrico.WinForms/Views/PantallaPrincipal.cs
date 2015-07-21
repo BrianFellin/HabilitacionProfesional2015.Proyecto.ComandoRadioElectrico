@@ -16,5 +16,17 @@ namespace ComandoRadioElectrico.WinForms.Views
         {
             InitializeComponent();
         }
+
+        private void gestiosDeSociosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PantallaSocios mPartnerView = new PantallaSocios();
+            mPartnerView.ShowDialog();
+        }
+
+        private void gestionDeCuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PantallaCuentas mAccountView = new PantallaCuentas();
+            mAccountView.ShowDialog();
+        }
     }
 }

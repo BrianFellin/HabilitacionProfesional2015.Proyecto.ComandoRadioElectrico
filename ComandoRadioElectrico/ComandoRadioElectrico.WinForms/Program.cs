@@ -21,7 +21,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             CoreServerModuleImpl.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PantallaSocios());
+            Application.Run(new pantallaPrincipal());
             
     
         }

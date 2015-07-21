@@ -3,7 +3,6 @@ using ComandoRadioElectrico.Core.Exceptions;
 using ComandoRadioElectrico.WinForms.Facade;
 using ComandoRadioElectrico.WinForms.Utils;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace ComandoRadioElectrico.WinForms.Views
@@ -23,12 +22,12 @@ namespace ComandoRadioElectrico.WinForms.Views
 
         private void LoadAccountantAccount()
         {
-            dgAccountantAccount.DataSource = AccountantAccountService.GetInstance.GetAll();                        
+            dgAccountantAccount.DataSource = AccountantAccountFacade.GetAll();                        
         }
 
         private void LoadCbAccountType()
         {
-            cbAccountType.DataSource = AccountTypeService.GetInstance.GetAll();
+            cbAccountType.DataSource = AccountTypeFacade.GetAll();
         }
 
         private void tbAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -54,18 +53,13 @@ namespace ComandoRadioElectrico.WinForms.Views
                     Description = tbDescription.Text,
                     Amount = Convert.ToSingle(tbAmount.Text)
                 };
-                AccountantAccountService.GetInstance.CreateAccountantAccount(mAccountantAccount);
-
+                AccountantAccountFacade.CreateAccountantAccount(mAccountantAccount);
+                MessageBox.Show("Cuenta creada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //Recargo la lista de cuentas contables
                 LoadAccountantAccount();                
                 CleanScreen();
-            }
-            catch (FormatException)
-            {                
-                labelError.Text = "Formato ingresado incorrecto";
-                labelError.Visible = true;                                
-            }
-            catch (DataFieldException)
+            }            
+            catch (BusinessException)
             {
                 if (tbCode.Text == string.Empty)
                 {
@@ -76,22 +70,39 @@ namespace ComandoRadioElectrico.WinForms.Views
                     if (tbName.Text == string.Empty)
                     {
                         nameError.Visible = true;
-                    }                 
+                    }
+                    else
+                    {
+                        amountError.Visible = true;
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                if (tbAmount.Text != string.Empty)
+                {
+                    labelError.Visible = true;
                 }
             }
         }
 
         private void bDelete_Click(object sender, EventArgs e)
         {
-            DeletedEntityDTO mDeletedEntity = new DeletedEntityDTO
+            DialogResult mAnswer = MessageBox.Show("¿Está seguro que desea eliminar dicha cuenta?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (mAnswer == DialogResult.Yes)
             {
-                Id = Convert.ToInt32(tbId.Text)
-            };
+                DeletedEntityDTO mDeletedEntity = new DeletedEntityDTO
+                {
+                    Id = Convert.ToInt32(tbId.Text)
+                };
 
-            AccountantAccountService.GetInstance.DeleteAccountantAccount(mDeletedEntity);
+                AccountantAccountFacade.DeleteAccountantAccount(mDeletedEntity);
 
-            //Recargo la lista de cuentas contables
-            LoadAccountantAccount();
+                MessageBox.Show("Cuenta eliminada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //Recargo la lista de cuentas contables
+                LoadAccountantAccount();
+            }
         }
 
         private void bUpdate_Click(object sender, EventArgs e)
@@ -108,16 +119,19 @@ namespace ComandoRadioElectrico.WinForms.Views
                     Amount = Convert.ToSingle(tbAmount.Text)
                 };
 
-                AccountantAccountService.GetInstance.UpdateAccountantAccount(mAccountantAccount);
+              AccountantAccountFacade.UpdateAccountantAccount(mAccountantAccount);
 
-                //Recargo la lista de cuentas contables
-                LoadAccountantAccount();
-                CleanScreen();
+              MessageBox.Show("Cuenta modificada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              //Recargo la lista de cuentas contables
+              LoadAccountantAccount();
+              CleanScreen();
             }
             catch (FormatException ex)
             {
-                labelError.Text = "Formato ingresado incorrecto";
-                labelError.Visible = true;
+                if (tbAmount.Text != string.Empty)
+                {
+                    labelError.Visible = true;
+                }
             }
         }
 
