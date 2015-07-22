@@ -58,6 +58,10 @@
             this.codeError = new System.Windows.Forms.PictureBox();
             this.nameError = new System.Windows.Forms.PictureBox();
             this.amountError = new System.Windows.Forms.PictureBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.bNext = new System.Windows.Forms.Button();
+            this.bBack = new System.Windows.Forms.Button();
+            this.tbPage = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccountantAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.codeError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameError)).BeginInit();
@@ -200,11 +204,11 @@
             this.IdAccountType,
             this.Id,
             this.Selection});
-            this.dgAccountantAccount.Location = new System.Drawing.Point(2, 170);
+            this.dgAccountantAccount.Location = new System.Drawing.Point(12, 170);
             this.dgAccountantAccount.Name = "dgAccountantAccount";
             this.dgAccountantAccount.ReadOnly = true;
             this.dgAccountantAccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAccountantAccount.Size = new System.Drawing.Size(802, 207);
+            this.dgAccountantAccount.Size = new System.Drawing.Size(780, 253);
             this.dgAccountantAccount.TabIndex = 30;
             this.dgAccountantAccount.TabStop = false;
             this.dgAccountantAccount.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAccountantAccount_CellContentClick);
@@ -335,11 +339,52 @@
             this.amountError.TabStop = false;
             this.amountError.Visible = false;
             // 
+            // tbSearch
+            // 
+            this.tbSearch.Location = new System.Drawing.Point(118, 135);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(398, 20);
+            this.tbSearch.TabIndex = 67;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // 
+            // bNext
+            // 
+            this.bNext.Location = new System.Drawing.Point(452, 442);
+            this.bNext.Name = "bNext";
+            this.bNext.Size = new System.Drawing.Size(75, 23);
+            this.bNext.TabIndex = 68;
+            this.bNext.Text = "Sig.";
+            this.bNext.UseVisualStyleBackColor = true;
+            this.bNext.Click += new System.EventHandler(this.bNext_Click);
+            // 
+            // bBack
+            // 
+            this.bBack.Enabled = false;
+            this.bBack.Location = new System.Drawing.Point(349, 442);
+            this.bBack.Name = "bBack";
+            this.bBack.Size = new System.Drawing.Size(75, 23);
+            this.bBack.TabIndex = 69;
+            this.bBack.Text = "Atras";
+            this.bBack.UseVisualStyleBackColor = true;
+            this.bBack.Click += new System.EventHandler(this.bBack_Click);
+            // 
+            // tbPage
+            // 
+            this.tbPage.Location = new System.Drawing.Point(591, 442);
+            this.tbPage.Name = "tbPage";
+            this.tbPage.Size = new System.Drawing.Size(29, 20);
+            this.tbPage.TabIndex = 70;
+            this.tbPage.Text = "1";
+            // 
             // PantallaCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 381);
+            this.ClientSize = new System.Drawing.Size(822, 477);
+            this.Controls.Add(this.tbPage);
+            this.Controls.Add(this.bBack);
+            this.Controls.Add(this.bNext);
+            this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.amountError);
             this.Controls.Add(this.nameError);
             this.Controls.Add(this.codeError);
@@ -402,7 +447,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdAccountType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewButtonColumn Selection;        
+        private System.Windows.Forms.DataGridViewButtonColumn Selection;
+        private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.Button bNext;
+        private System.Windows.Forms.Button bBack;
+        private System.Windows.Forms.TextBox tbPage;        
 
     }
 }

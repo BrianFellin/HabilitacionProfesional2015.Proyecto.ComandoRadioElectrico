@@ -9,6 +9,9 @@ namespace ComandoRadioElectrico.Core.DAO
 {
     public class DocumentTypeDAO : DAOBase<DocumentType>, IDocumentTypeDAO
     {
-
+        public override FindEntityResult<DocumentType> Find(FindEntityParams pFindParams)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

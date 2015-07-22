@@ -12,7 +12,7 @@ namespace ComandoRadioElectrico.Core.NHibernate.Model
     public class Quota
     {
         public virtual int Id { get; set; }
-        public virtual string Period { get; set; }
+        public virtual GeneratedPeriod Period { get; set; }
         public virtual float Amount { get; set; }
         public virtual Boolean IsPaid { get; set; }
         public virtual Partner Partner { get; set; }

@@ -16,13 +16,25 @@ namespace ComandoRadioElectrico.WinForms.Views
 
         private void PantallaCuentas_Load(object sender, EventArgs e)
         {
-            LoadAccountantAccount();
-            LoadCbAccountType();
+            try
+            {
+                LoadAccountantAccount();
+                LoadCbAccountType();
+            }
+            catch (BusinessException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadAccountantAccount()
         {
-            dgAccountantAccount.DataSource = AccountantAccountFacade.GetAll();                        
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search("", Convert.ToInt32(tbPage.Text)-1);
+            dgAccountantAccount.DataSource = mResult.Result;
         }
 
         private void LoadCbAccountType()
@@ -45,6 +57,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         {
             try
             {
+                ClearErrors();
                 AccountantAccountDTO mAccountantAccount = new AccountantAccountDTO
                 {
                     Name = tbName.Text,
@@ -59,7 +72,7 @@ namespace ComandoRadioElectrico.WinForms.Views
                 LoadAccountantAccount();                
                 CleanScreen();
             }            
-            catch (BusinessException)
+            catch (BusinessException ex)
             {
                 if (tbCode.Text == string.Empty)
                 {
@@ -73,35 +86,55 @@ namespace ComandoRadioElectrico.WinForms.Views
                     }
                     else
                     {
-                        amountError.Visible = true;
+                        if (tbAmount.Text == string.Empty)
+                        {
+                            amountError.Visible = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
+                    
                 }
             }
             catch (FormatException)
             {
-                if (tbAmount.Text != string.Empty)
-                {
-                    labelError.Visible = true;
-                }
+                labelError.Visible = true;
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void bDelete_Click(object sender, EventArgs e)
         {
-            DialogResult mAnswer = MessageBox.Show("¿Está seguro que desea eliminar dicha cuenta?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (mAnswer == DialogResult.Yes)
+            try
             {
-                DeletedEntityDTO mDeletedEntity = new DeletedEntityDTO
+                DialogResult mAnswer = MessageBox.Show("¿Está seguro que desea eliminar dicha cuenta?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (mAnswer == DialogResult.Yes)
                 {
-                    Id = Convert.ToInt32(tbId.Text)
-                };
+                    DeletedEntityDTO mDeletedEntity = new DeletedEntityDTO
+                    {
+                        Id = Convert.ToInt32(tbId.Text)
+                    };
 
-                AccountantAccountFacade.DeleteAccountantAccount(mDeletedEntity);
+                    AccountantAccountFacade.DeleteAccountantAccount(mDeletedEntity);
 
-                MessageBox.Show("Cuenta eliminada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cuenta eliminada satisfactoriamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //Recargo la lista de cuentas contables
-                LoadAccountantAccount();
+                    //Recargo la lista de cuentas contables
+                    LoadAccountantAccount();
+                }
+            }
+            catch (BusinessException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -109,6 +142,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         {
             try
             {
+                ClearErrors();
                 AccountantAccountDTO mAccountantAccount = new AccountantAccountDTO
                 {
                     Id = Convert.ToInt32(tbId.Text),
@@ -132,6 +166,36 @@ namespace ComandoRadioElectrico.WinForms.Views
                 {
                     labelError.Visible = true;
                 }
+            }
+            catch (BusinessException ex)
+            {
+                if (tbCode.Text == string.Empty)
+                {
+                    codeError.Visible = true;
+                }
+                else
+                {
+                    if (tbName.Text == string.Empty)
+                    {
+                        nameError.Visible = true;
+                    }
+                    else
+                    {
+                        if (tbAmount.Text == string.Empty)
+                        {
+                            amountError.Visible = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                }
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -177,9 +241,64 @@ namespace ComandoRadioElectrico.WinForms.Views
             tbCode.Text = String.Empty;
             tbDescription.Text = String.Empty;
             tbName.Text = String.Empty;
+            ClearErrors();
+        }
+
+        private void ClearErrors()
+        {
             labelError.Visible = false;
             codeError.Visible = false;
             nameError.Visible = false;
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(tbSearch.Text.ToString(),0);
+            dgAccountantAccount.DataSource = mResult.Result;
+
+        }
+
+        private void bNext_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPage.Text) == 1)
+            {
+                bBack.Enabled = true;
+            }
+            string mText = "";
+            if (tbSearch.Text != string.Empty){
+                mText = tbSearch.Text;
+            }
+
+            tbPage.Text = (Convert.ToInt32(tbPage.Text) + 1).ToString();
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text)-1);
+            dgAccountantAccount.DataSource = mResult.Result;            
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = false;
+            }
+
+        }
+
+        private void bBack_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPage.Text)- 1 == 1)
+            {
+                bBack.Enabled = false;
+            }
+            string mText = "";
+            if (tbSearch.Text != string.Empty)
+            {
+                mText = tbSearch.Text;
+            }
+            tbPage.Text = (Convert.ToInt32(tbPage.Text) - 1).ToString();
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text)-1);
+            dgAccountantAccount.DataSource = mResult.Result;
+            
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = true;
+            }
+            
         }
     }
 }

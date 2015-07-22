@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComandoRadioElectrico.WinForms.Facade;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,5 +29,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             PantallaCuentas mAccountView = new PantallaCuentas();
             mAccountView.ShowDialog();
         }
+
+      
     }
 }

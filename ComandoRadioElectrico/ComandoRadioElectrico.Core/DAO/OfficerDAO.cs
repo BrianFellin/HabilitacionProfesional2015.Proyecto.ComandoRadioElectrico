@@ -9,6 +9,9 @@ namespace ComandoRadioElectrico.Core.DAO
 {
     public class OfficerDAO : DAOBase<Officer>, IOfficerDAO
     {
-
+        public override FindEntityResult<Officer> Find(FindEntityParams pFindParams)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

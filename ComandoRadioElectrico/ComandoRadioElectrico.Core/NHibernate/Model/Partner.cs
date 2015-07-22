@@ -17,8 +17,10 @@ namespace ComandoRadioElectrico.Core.NHibernate.Model
         public virtual string Code { get; set; }
         public virtual string CollectDomicile { get; set; }
         public virtual string CollectDay { get; set; }
-        public virtual DateTime StarDate { get; set; }
+        public virtual DateTime? StarDate { get; set; }
         public virtual DateTime? FinishDate { get; set; }
-        public virtual double ValueQuota { get; set; }              
+        public virtual float ValueQuota { get; set; }
+        public virtual int QuotaRegime { get; set; }
+        public virtual int QuotaCounter { get; set; }
     }
 }

@@ -23,21 +23,17 @@ namespace ComandoRadioElectrico.Core
         }
         private static void Configure()
         {
-            #region Servicios      
-            iUnityContainer.RegisterType<IAccountantAccountService, AccountantAccountService>();
-            iUnityContainer.RegisterType<IAccountTypeService, AccountTypeService>();
-            //iUnityContainer.RegisterType<IDocumentTypeService, DocumentTypeService>();
-            #endregion
 
             #region Servicios DAO
             iUnityContainer.RegisterType<IAccountTypeDAO, AccountTypeDAO>();
-            iUnityContainer.RegisterType<IAccountantAccountDAO, AccountantAccountDAO>();
             iUnityContainer.RegisterType<IDocumentTypeDAO, DocumentTypeDAO>();
             iUnityContainer.RegisterType<IAccountantAccountDAO, AccountantAccountDAO>();
             iUnityContainer.RegisterType<IPartnerDAO, PartnerDAO>();
             iUnityContainer.RegisterType<IOfficerDAO, OfficerDAO>();
             iUnityContainer.RegisterType<IPersonDAO, PersonDAO>();
-            
+            iUnityContainer.RegisterType<IGeneratedPeriodDAO, GeneratedPeriodDAO>();
+            iUnityContainer.RegisterType<IQuotaDAO, QuotaDAO>();
+
             #endregion
 
             #region Otros servicios

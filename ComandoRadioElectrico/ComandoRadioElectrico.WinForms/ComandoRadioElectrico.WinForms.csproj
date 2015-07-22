@@ -58,6 +58,7 @@
     <Compile Include="Facade\AccountTypeFacade.cs" />
     <Compile Include="Facade\DocumentTypeFacade.cs" />
     <Compile Include="Facade\OfficerFacade.cs" />
+    <Compile Include="Facade\QuotaFacade.cs" />
     <Compile Include="Facade\PartnerFacade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
