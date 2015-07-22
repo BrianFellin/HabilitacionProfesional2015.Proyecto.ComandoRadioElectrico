@@ -12,9 +12,9 @@ namespace ComandoRadioElectrico.Core.DTO
         public OfficerDTO Officer { get; set; }
         public string Code { get; set; }
         public string CollectDomicile { get; set; }
-        public DateTime CollectDay { get; set; }
+        public string CollectDay { get; set; }
         public DateTime StarDate { get; set; }
-        public DateTime FinishDate { get; set; }
+        public DateTime? FinishDate { get; set; }
         public float ValueQuota { get; set; } 
     }
 }

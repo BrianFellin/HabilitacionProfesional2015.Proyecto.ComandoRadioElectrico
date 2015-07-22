@@ -98,6 +98,7 @@
     <Compile Include="Services\Implementations\DocumentTypeService.cs" />
     <Compile Include="Services\Implementations\OfficerService.cs" />
     <Compile Include="Services\Implementations\PartnerService.cs" />
+    <Compile Include="Exceptions\QuotaException.cs" />
     <Compile Include="Services\Interfaces\IAccountantAccountService.cs" />
     <Compile Include="Services\Interfaces\IAccountTypeService.cs" />
     <Compile Include="Services\Interfaces\IDocumentTypeService.cs" />

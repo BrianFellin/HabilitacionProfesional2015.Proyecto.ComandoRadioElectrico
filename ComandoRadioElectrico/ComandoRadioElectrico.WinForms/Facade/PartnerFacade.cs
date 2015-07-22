@@ -22,5 +22,15 @@ namespace ComandoRadioElectrico.WinForms.Facade
         {
             return iPartnerSvc.GetPartner(pPartnerId);
         }
+
+        public static void DeletePartner(int pPartnerId)
+        {
+            iPartnerSvc.DeletePartner(pPartnerId);
+        }
+
+        public static void UpdatePartner(PartnerDTO pPartnerToUpdate)
+        {
+            iPartnerSvc.UpdatePartner(pPartnerToUpdate);
+        }
     }
 }

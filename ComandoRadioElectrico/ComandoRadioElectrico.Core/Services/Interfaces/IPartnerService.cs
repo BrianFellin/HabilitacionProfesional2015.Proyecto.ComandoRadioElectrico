@@ -31,7 +31,7 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// 
         /// </summary>
         /// <param name="pPartnerToDelete"></param>
-        void DeletePartner(DeletedEntityDTO pPartnerToDelete);
+        void DeletePartner(int pPartnerId);
 
         /// <summary>
         /// 
