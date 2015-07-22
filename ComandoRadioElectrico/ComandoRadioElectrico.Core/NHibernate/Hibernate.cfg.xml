@@ -18,5 +18,6 @@
     <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.TipoCuenta.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
     <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.TipoDocumento.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
     <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.TipoMovimiento.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
+    <mapping resource="ComandoRadioElectrico.Core.NHibernate.NHConfig.PeriodoGenerado.hbm.xml" assembly="ComandoRadioElectrico.Core"/>
   </session-factory>
 </hibernate-configuration>

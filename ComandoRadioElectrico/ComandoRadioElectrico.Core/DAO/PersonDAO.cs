@@ -1,12 +1,15 @@
 ﻿using ComandoRadioElectrico.Core.DAO.DAOBase;
 using ComandoRadioElectrico.Core.NHibernate.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace ComandoRadioElectrico.Core.DAO
 {
-    public class AccountTypeDAO : DAOBase<AccountType>, IAccountTypeDAO
+    public class PersonDAO : DAOBase<Person>, IPersonDAO
     {
-        public override FindEntityResult<AccountType> Find(FindEntityParams pFindParams)
+        public override FindEntityResult<Person> Find(FindEntityParams pFindParams)
         {
             throw new NotImplementedException();
         }

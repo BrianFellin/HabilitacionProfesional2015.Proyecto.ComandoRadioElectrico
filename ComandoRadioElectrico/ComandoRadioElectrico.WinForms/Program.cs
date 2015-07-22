@@ -1,13 +1,13 @@
 ﻿using ComandoRadioElectrico.Core;
 using ComandoRadioElectrico.Core.Utils;
-using Pantallas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComandoRadioElectrico.WinForms.Views;
 
-namespace ComandoRadioElectrico.WinForms
+namespace ComandoRadioElectrico.WinForms.Views
 {
     static class Program
     {
@@ -21,7 +21,7 @@ namespace ComandoRadioElectrico.WinForms
             CoreServerModuleImpl.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PantallaCuentas());
+            Application.Run(new pantallaPrincipal());
             
     
         }

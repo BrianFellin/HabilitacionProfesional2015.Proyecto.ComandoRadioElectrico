@@ -11,19 +11,6 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pAccountantAccountId"></param>
-        /// <returns></returns>
-        AccountantAccountDTO GetAccountantAccount(int pAccountantAccountId);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        IList<AccountantAccountDTO> GetAll();
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="pAccountantAccountToCreate"></param>
         void CreateAccountantAccount(AccountantAccountDTO pAccountantAccountToCreate);
 
@@ -38,5 +25,12 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// </summary>
         /// <param name="pAccountantAccountToDelete"></param>
         void DeleteAccountantAccount(DeletedEntityDTO pAccountantAccountToDelete);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pCriteria"></param>
+        /// <returns></returns>
+        FindEntityResultDTO<AccountantAccountDTO> FindAccountantAccount(FindEntityDTO pCriteria);
     }
 }

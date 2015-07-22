@@ -14,21 +14,15 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// </summary>
         /// <param name="pQuotaId"></param>
         /// <returns></returns>
-        IList<QuotaDTO> GetQuotasForPartner(int pIdPartner);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        IList<QuotaDTO> GetAll();
+        IList<QuotaDTO> GetQuotasOfPartner(int pIdPartner);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pQuotaToPay"></param>
-        void Pay(QuotaDTO pQuotaToPay);
+        void Pay(int pIdQuotaToPay);
 
-        void GenerateQuotas(MonthPeriod pPeriod, int pYear);
+        void GenerateQuotas(MonthPeriod pMonth, int pYear);
 
     }
 }

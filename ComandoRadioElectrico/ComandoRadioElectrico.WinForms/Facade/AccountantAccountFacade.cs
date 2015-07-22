@@ -24,9 +24,17 @@ namespace ComandoRadioElectrico.WinForms.Facade
             iAccountantAccountSvc.DeleteAccountantAccount(pDeletedEntityDTO);
         }
 
-        public static IList<AccountantAccountDTO> GetAll()
+        public static FindEntityResultDTO<AccountantAccountDTO> Search(string pSearchText, int pPage)
         {
-            return iAccountantAccountSvc.GetAll();
+            FindEntityResultDTO<AccountantAccountDTO> mResult = iAccountantAccountSvc.FindAccountantAccount(new FindEntityDTO
+            {
+                QuickSearchText = pSearchText,
+                RecordCount = 10,
+                SkipRecordCount = pPage * 10,
+                OrderByDirectionDescending = true               
+            });
+
+            return mResult;                
         }
     }
 }

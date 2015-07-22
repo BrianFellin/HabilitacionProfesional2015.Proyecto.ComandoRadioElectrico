@@ -2,11 +2,13 @@
 using NHibernate.Cfg;
 using NHibernate.Exceptions;
 using System.Collections.Generic;
+using ComandoRadioElectrico.Core.NHibernate.Model;
 
 namespace ComandoRadioElectrico.Core.DAO.DAOBase
 {
-    public class DAOBase<T> : IDAOBase<T> where T:class
+    public abstract class DAOBase<T> : IDAOBase<T> where T:class
     {
+    
         public void Create(T pEntity)
         {
             try
@@ -96,5 +98,7 @@ namespace ComandoRadioElectrico.Core.DAO.DAOBase
                 throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
             }
         }
+
+        public abstract FindEntityResult<T> Find(FindEntityParams pFindParams);                        
     }
 }

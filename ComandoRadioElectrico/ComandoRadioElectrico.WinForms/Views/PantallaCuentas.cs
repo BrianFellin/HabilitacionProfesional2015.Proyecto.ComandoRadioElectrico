@@ -5,7 +5,7 @@ using ComandoRadioElectrico.WinForms.Utils;
 using System;
 using System.Windows.Forms;
 
-namespace Pantallas
+namespace ComandoRadioElectrico.WinForms.Views
 {
     public partial class PantallaCuentas : Form
     {
@@ -33,7 +33,8 @@ namespace Pantallas
 
         private void LoadAccountantAccount()
         {
-            dgAccountantAccount.DataSource = AccountantAccountFacade.GetAll();                        
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search("", Convert.ToInt32(tbPage.Text)-1);
+            dgAccountantAccount.DataSource = mResult.Result;
         }
 
         private void LoadCbAccountType()
@@ -56,6 +57,7 @@ namespace Pantallas
         {
             try
             {
+                ClearErrors();
                 AccountantAccountDTO mAccountantAccount = new AccountantAccountDTO
                 {
                     Name = tbName.Text,
@@ -140,6 +142,7 @@ namespace Pantallas
         {
             try
             {
+                ClearErrors();
                 AccountantAccountDTO mAccountantAccount = new AccountantAccountDTO
                 {
                     Id = Convert.ToInt32(tbId.Text),
@@ -163,6 +166,36 @@ namespace Pantallas
                 {
                     labelError.Visible = true;
                 }
+            }
+            catch (BusinessException ex)
+            {
+                if (tbCode.Text == string.Empty)
+                {
+                    codeError.Visible = true;
+                }
+                else
+                {
+                    if (tbName.Text == string.Empty)
+                    {
+                        nameError.Visible = true;
+                    }
+                    else
+                    {
+                        if (tbAmount.Text == string.Empty)
+                        {
+                            amountError.Visible = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                }
+            }
+            catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -208,9 +241,64 @@ namespace Pantallas
             tbCode.Text = String.Empty;
             tbDescription.Text = String.Empty;
             tbName.Text = String.Empty;
+            ClearErrors();
+        }
+
+        private void ClearErrors()
+        {
             labelError.Visible = false;
             codeError.Visible = false;
             nameError.Visible = false;
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(tbSearch.Text.ToString(),0);
+            dgAccountantAccount.DataSource = mResult.Result;
+
+        }
+
+        private void bNext_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPage.Text) == 1)
+            {
+                bBack.Enabled = true;
+            }
+            string mText = "";
+            if (tbSearch.Text != string.Empty){
+                mText = tbSearch.Text;
+            }
+
+            tbPage.Text = (Convert.ToInt32(tbPage.Text) + 1).ToString();
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text)-1);
+            dgAccountantAccount.DataSource = mResult.Result;            
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = false;
+            }
+
+        }
+
+        private void bBack_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPage.Text)- 1 == 1)
+            {
+                bBack.Enabled = false;
+            }
+            string mText = "";
+            if (tbSearch.Text != string.Empty)
+            {
+                mText = tbSearch.Text;
+            }
+            tbPage.Text = (Convert.ToInt32(tbPage.Text) - 1).ToString();
+            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text)-1);
+            dgAccountantAccount.DataSource = mResult.Result;
+            
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = true;
+            }
+            
         }
     }
 }

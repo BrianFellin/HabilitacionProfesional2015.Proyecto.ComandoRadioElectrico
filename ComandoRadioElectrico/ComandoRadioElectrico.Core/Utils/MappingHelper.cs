@@ -17,7 +17,12 @@ namespace ComandoRadioElectrico.Core.Utils
             Mapper.CreateMap<PersonDTO, Person>();
             Mapper.CreateMap<AccountantAccountDTO, AccountantAccount>();
             Mapper.CreateMap<AccountantAccount, AccountantAccountDTO>();
-            Mapper.CreateMap<AccountType, AccountTypeDTO>();                       
+            Mapper.CreateMap<AccountType, AccountTypeDTO>();
+            Mapper.CreateMap<Officer, OfficerDTO>();
+            Mapper.CreateMap<OfficerDTO, Officer>();
+            Mapper.CreateMap<DocumentTypeDTO, DocumentType>();
+            Mapper.CreateMap<QuotaDTO, Quota>();  
+            Mapper.CreateMap<FindEntityResult<AccountantAccount>,FindEntityResultDTO<AccountantAccountDTO>>();
         }      
     }
 }

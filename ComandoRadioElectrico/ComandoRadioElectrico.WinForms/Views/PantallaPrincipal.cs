@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComandoRadioElectrico.WinForms.Facade;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pantallas
+namespace ComandoRadioElectrico.WinForms.Views
 {
     public partial class pantallaPrincipal : Form
     {
@@ -17,9 +18,18 @@ namespace Pantallas
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void gestiosDeSociosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            PantallaSocios mPartnerView = new PantallaSocios();
+            mPartnerView.ShowDialog();
         }
+
+        private void gestionDeCuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PantallaCuentas mAccountView = new PantallaCuentas();
+            mAccountView.ShowDialog();
+        }
+
+      
     }
 }

@@ -51,8 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\OfficerComboBoxAdapter.cs" />
+    <Compile Include="Adapter\PartnerGridViewAdapter.cs" />
     <Compile Include="Facade\AccountantAccountFacade.cs" />
-    <Compile Include="Facade\AccountTypeServiceFacade.cs" />
+    <Compile Include="Facade\AccountTypeFacade.cs" />
+    <Compile Include="Facade\DocumentTypeFacade.cs" />
+    <Compile Include="Facade\OfficerFacade.cs" />
+    <Compile Include="Facade\QuotaFacade.cs" />
+    <Compile Include="Facade\PartnerFacade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Miscellaneous.cs" />

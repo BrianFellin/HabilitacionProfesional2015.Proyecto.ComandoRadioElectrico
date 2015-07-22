@@ -10,6 +10,8 @@
     <property name="StarDate" column="FechaIngreso"/>
     <property name="FinishDate" column="FechaBaja"/>
     <property name="ValueQuota" column="ValorCuota"/>
+    <property name="QuotaRegime" column="RegimenCuota"/>
+    <property name="QuotaCounter" column="ContadorCuota"/>
 
     <many-to-one name="Person" 
                  column="IdPersona" class="Person" 

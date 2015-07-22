@@ -18,17 +18,7 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
         {
             this.iAccountantAccountDAO = this.Resolve<IAccountantAccountDAO>();
             this.iAccountTypeDAO = this.Resolve<IAccountTypeDAO>();
-        }
-
-        public AccountantAccountDTO GetAccountantAccount(int pAccountantAccountId)
-        {
-            return Mapper.Map<AccountantAccountDTO>(this.iAccountantAccountDAO.GetById(pAccountantAccountId));
-        }
-
-        public IList<AccountantAccountDTO> GetAll()
-        {
-            return Mapper.Map<IList<AccountantAccountDTO>>(this.iAccountantAccountDAO.GetAll());
-        }
+        }       
 
         public void CreateAccountantAccount(AccountantAccountDTO pAccountantAccountToCreate)
         {
@@ -83,7 +73,7 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
                mAccountantAccountToUpdate.AccountType = this.iAccountTypeDAO.GetById(pAccountantAccountToUpdate.AccountTypeId);
             }
             //validamos que el codigo sea unico y no halla otra cuenta con el mismo codigo
-            if ((from a in this.iAccountantAccountDAO.GetAll() where a.Code == pAccountantAccountToUpdate.Code select a).Count() > 0)
+            if ((from a in this.iAccountantAccountDAO.GetAll() where a.Code == pAccountantAccountToUpdate.Code & a.Id != pAccountantAccountToUpdate.Id select a).Count() > 0)
             {
                 throw new BusinessException("Ya existe una cuenta con el codigo ingresado, ingrese otro");
             }
@@ -101,6 +91,17 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
 
           // eliminamos la cuenta contable
           this.iAccountantAccountDAO.Delete(pAccountantAccountToDelete.Id);
+        }
+
+        public FindEntityResultDTO<AccountantAccountDTO> FindAccountantAccount(FindEntityDTO pCriteria)
+        {
+            return Mapper.Map<FindEntityResult<AccountantAccount>,FindEntityResultDTO<AccountantAccountDTO>>(this.iAccountantAccountDAO.Find(new FindEntityParams
+            {
+                QuickSearchText = pCriteria.QuickSearchText,
+                RecordCount = pCriteria.RecordCount,
+                OrderByDirectionDescending = pCriteria.OrderByDirectionDescending,
+                SkipRecordCount = pCriteria.SkipRecordCount
+            }));            
         }
     }
 }
