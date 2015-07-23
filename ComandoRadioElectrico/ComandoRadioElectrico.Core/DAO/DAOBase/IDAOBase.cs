@@ -16,8 +16,8 @@ namespace ComandoRadioElectrico.Core.DAO.DAOBase
         /// 
         /// </summary>
         /// <param name="pEntity"></param>
-        /// <returns></returns>
-        void Create(T pEntity);
+        /// <returns>Id de la entidad creada</returns>
+        int Create(T pEntity);
 
         /// <summary>
         /// 

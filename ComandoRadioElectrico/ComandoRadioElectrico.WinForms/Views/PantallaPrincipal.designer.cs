@@ -34,6 +34,7 @@
             this.gestiosDeSociosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.gestionDeCobradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +53,8 @@
             // 
             this.administraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gestiosDeSociosToolStripMenuItem,
-            this.gestionDeCuentasToolStripMenuItem});
+            this.gestionDeCuentasToolStripMenuItem,
+            this.gestionDeCobradoresToolStripMenuItem});
             this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
             this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administraciónToolStripMenuItem.Text = "Administración";
@@ -60,14 +62,14 @@
             // gestiosDeSociosToolStripMenuItem
             // 
             this.gestiosDeSociosToolStripMenuItem.Name = "gestiosDeSociosToolStripMenuItem";
-            this.gestiosDeSociosToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.gestiosDeSociosToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.gestiosDeSociosToolStripMenuItem.Text = "Gestion de Socios";
             this.gestiosDeSociosToolStripMenuItem.Click += new System.EventHandler(this.gestiosDeSociosToolStripMenuItem_Click);
             // 
             // gestionDeCuentasToolStripMenuItem
             // 
             this.gestionDeCuentasToolStripMenuItem.Name = "gestionDeCuentasToolStripMenuItem";
-            this.gestionDeCuentasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.gestionDeCuentasToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.gestionDeCuentasToolStripMenuItem.Text = "Gestion de Cuentas";
             this.gestionDeCuentasToolStripMenuItem.Click += new System.EventHandler(this.gestionDeCuentasToolStripMenuItem_Click);
             // 
@@ -80,6 +82,13 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // gestionDeCobradoresToolStripMenuItem
+            // 
+            this.gestionDeCobradoresToolStripMenuItem.Name = "gestionDeCobradoresToolStripMenuItem";
+            this.gestionDeCobradoresToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.gestionDeCobradoresToolStripMenuItem.Text = "Gestion de Cobradores";
+            this.gestionDeCobradoresToolStripMenuItem.Click += new System.EventHandler(this.gestionDeCobradoresToolStripMenuItem_Click);
             // 
             // pantallaPrincipal
             // 
@@ -107,6 +116,7 @@
         private System.Windows.Forms.ToolStripMenuItem administraciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestiosDeSociosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionDeCuentasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionDeCobradoresToolStripMenuItem;
     }
 }
 

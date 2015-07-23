@@ -19,8 +19,7 @@ namespace ComandoRadioElectrico.Core.DAO
                                                           
 
             int mTotalRecords = mSectFilteredQry.Count();
-
-            //; ExpressionHelper.OrderingHelper<Client>(mSectFilteredQry, pFindParams.OrderBy, pFindParams.OrderByDirectionDescending)
+            
             IEnumerable<AccountantAccount> mAccounts = mSectFilteredQry
                             .Skip(pFindParams.SkipRecordCount)
                             .Take(pFindParams.RecordCount)

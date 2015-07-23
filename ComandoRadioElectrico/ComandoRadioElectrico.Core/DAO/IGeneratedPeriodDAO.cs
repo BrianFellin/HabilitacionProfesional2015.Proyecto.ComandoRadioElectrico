@@ -5,6 +5,5 @@ namespace ComandoRadioElectrico.Core.DAO
 {
     public interface IGeneratedPeriodDAO : IDAOBase<GeneratedPeriod>
     {
-        int CreatePeriod(GeneratedPeriod pGeneratedPeriod);
     }
 }

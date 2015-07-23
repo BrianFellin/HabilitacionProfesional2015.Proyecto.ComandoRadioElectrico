@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaCobradores));
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbDateLower = new System.Windows.Forms.TextBox();
+            this.tbDateIn = new System.Windows.Forms.TextBox();
+            this.tbPhone = new System.Windows.Forms.TextBox();
+            this.tbDomicile = new System.Windows.Forms.TextBox();
+            this.tbDocumentNumber = new System.Windows.Forms.TextBox();
+            this.tbLastName = new System.Windows.Forms.TextBox();
+            this.tbFirstName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -45,7 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgOfficer = new System.Windows.Forms.DataGridView();
             this.nombreSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellidoSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.domicilioSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,64 +53,59 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.cbDocumentType = new System.Windows.Forms.ComboBox();
+            this.tbPage = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgOfficer)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox8
+            // tbDateLower
             // 
-            this.textBox8.Location = new System.Drawing.Point(466, 89);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(235, 20);
-            this.textBox8.TabIndex = 53;
+            this.tbDateLower.Location = new System.Drawing.Point(466, 89);
+            this.tbDateLower.Name = "tbDateLower";
+            this.tbDateLower.Size = new System.Drawing.Size(235, 20);
+            this.tbDateLower.TabIndex = 53;
             // 
-            // textBox9
+            // tbDateIn
             // 
-            this.textBox9.Location = new System.Drawing.Point(466, 67);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(235, 20);
-            this.textBox9.TabIndex = 52;
+            this.tbDateIn.Location = new System.Drawing.Point(466, 67);
+            this.tbDateIn.Name = "tbDateIn";
+            this.tbDateIn.Size = new System.Drawing.Size(235, 20);
+            this.tbDateIn.TabIndex = 52;
             // 
-            // textBox12
+            // tbPhone
             // 
-            this.textBox12.Location = new System.Drawing.Point(466, 45);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(235, 20);
-            this.textBox12.TabIndex = 49;
+            this.tbPhone.Location = new System.Drawing.Point(466, 45);
+            this.tbPhone.Name = "tbPhone";
+            this.tbPhone.Size = new System.Drawing.Size(235, 20);
+            this.tbPhone.TabIndex = 49;
             // 
-            // textBox5
+            // tbDomicile
             // 
-            this.textBox5.Location = new System.Drawing.Point(466, 23);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(235, 20);
-            this.textBox5.TabIndex = 47;
+            this.tbDomicile.Location = new System.Drawing.Point(466, 23);
+            this.tbDomicile.Name = "tbDomicile";
+            this.tbDomicile.Size = new System.Drawing.Size(235, 20);
+            this.tbDomicile.TabIndex = 47;
             // 
-            // textBox6
+            // tbDocumentNumber
             // 
-            this.textBox6.Location = new System.Drawing.Point(132, 87);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(235, 20);
-            this.textBox6.TabIndex = 46;
+            this.tbDocumentNumber.Location = new System.Drawing.Point(132, 92);
+            this.tbDocumentNumber.Name = "tbDocumentNumber";
+            this.tbDocumentNumber.Size = new System.Drawing.Size(235, 20);
+            this.tbDocumentNumber.TabIndex = 46;
             // 
-            // textBox3
+            // tbLastName
             // 
-            this.textBox3.Location = new System.Drawing.Point(132, 65);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(235, 20);
-            this.textBox3.TabIndex = 45;
+            this.tbLastName.Location = new System.Drawing.Point(132, 43);
+            this.tbLastName.Name = "tbLastName";
+            this.tbLastName.Size = new System.Drawing.Size(235, 20);
+            this.tbLastName.TabIndex = 44;
             // 
-            // textBox2
+            // tbFirstName
             // 
-            this.textBox2.Location = new System.Drawing.Point(132, 43);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(235, 20);
-            this.textBox2.TabIndex = 44;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(132, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(235, 20);
-            this.textBox1.TabIndex = 42;
+            this.tbFirstName.Location = new System.Drawing.Point(132, 21);
+            this.tbFirstName.Name = "tbFirstName";
+            this.tbFirstName.Size = new System.Drawing.Size(235, 20);
+            this.tbFirstName.TabIndex = 42;
             // 
             // label10
             // 
@@ -185,41 +179,48 @@
             this.label2.TabIndex = 32;
             this.label2.Text = "Nombre";
             // 
-            // dataGridView1
+            // dgOfficer
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgOfficer.AllowUserToAddRows = false;
+            this.dgOfficer.AllowUserToDeleteRows = false;
+            this.dgOfficer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgOfficer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nombreSocio,
             this.apellidoSocio,
             this.domicilioSocio,
             this.documentoSocio});
-            this.dataGridView1.Location = new System.Drawing.Point(2, 170);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(802, 207);
-            this.dataGridView1.TabIndex = 30;
+            this.dgOfficer.Location = new System.Drawing.Point(2, 170);
+            this.dgOfficer.Name = "dgOfficer";
+            this.dgOfficer.ReadOnly = true;
+            this.dgOfficer.Size = new System.Drawing.Size(802, 207);
+            this.dgOfficer.TabIndex = 30;
             // 
             // nombreSocio
             // 
             this.nombreSocio.HeaderText = "Nombre";
             this.nombreSocio.Name = "nombreSocio";
+            this.nombreSocio.ReadOnly = true;
             this.nombreSocio.Width = 180;
             // 
             // apellidoSocio
             // 
             this.apellidoSocio.HeaderText = "Apellido";
             this.apellidoSocio.Name = "apellidoSocio";
+            this.apellidoSocio.ReadOnly = true;
             this.apellidoSocio.Width = 180;
             // 
             // domicilioSocio
             // 
             this.domicilioSocio.HeaderText = "Domicilio";
             this.domicilioSocio.Name = "domicilioSocio";
+            this.domicilioSocio.ReadOnly = true;
             this.domicilioSocio.Width = 250;
             // 
             // documentoSocio
             // 
             this.documentoSocio.HeaderText = "Documento";
             this.documentoSocio.Name = "documentoSocio";
+            this.documentoSocio.ReadOnly = true;
             this.documentoSocio.Width = 148;
             // 
             // button3
@@ -262,23 +263,43 @@
             this.button1.Text = "Alta";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // cbDocumentType
+            // 
+            this.cbDocumentType.DisplayMember = "Type";
+            this.cbDocumentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDocumentType.FormattingEnabled = true;
+            this.cbDocumentType.Location = new System.Drawing.Point(132, 66);
+            this.cbDocumentType.Name = "cbDocumentType";
+            this.cbDocumentType.Size = new System.Drawing.Size(235, 21);
+            this.cbDocumentType.TabIndex = 63;
+            this.cbDocumentType.ValueMember = "Id";
+            // 
+            // tbPage
+            // 
+            this.tbPage.Location = new System.Drawing.Point(594, 144);
+            this.tbPage.Name = "tbPage";
+            this.tbPage.Size = new System.Drawing.Size(100, 20);
+            this.tbPage.TabIndex = 64;
+            this.tbPage.Text = "1";
+            // 
             // PantallaCobradores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 381);
+            this.Controls.Add(this.tbPage);
+            this.Controls.Add(this.cbDocumentType);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbDateLower);
+            this.Controls.Add(this.tbDateIn);
+            this.Controls.Add(this.tbPhone);
+            this.Controls.Add(this.tbDomicile);
+            this.Controls.Add(this.tbDocumentNumber);
+            this.Controls.Add(this.tbLastName);
+            this.Controls.Add(this.tbFirstName);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -287,11 +308,12 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgOfficer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PantallaCobradores";
             this.Text = "Sistema de Gestión - Comando Radioeléctrico / Cobradores";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.PantallaCobradores_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgOfficer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,14 +321,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbDateLower;
+        private System.Windows.Forms.TextBox tbDateIn;
+        private System.Windows.Forms.TextBox tbPhone;
+        private System.Windows.Forms.TextBox tbDomicile;
+        private System.Windows.Forms.TextBox tbDocumentNumber;
+        private System.Windows.Forms.TextBox tbLastName;
+        private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
@@ -315,7 +336,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgOfficer;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreSocio;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellidoSocio;
         private System.Windows.Forms.DataGridViewTextBoxColumn domicilioSocio;
@@ -324,6 +345,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbDocumentType;
+        private System.Windows.Forms.TextBox tbPage;
 
     }
 }

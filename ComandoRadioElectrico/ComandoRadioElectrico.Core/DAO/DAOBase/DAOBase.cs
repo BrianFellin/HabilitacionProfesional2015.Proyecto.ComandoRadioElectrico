@@ -9,7 +9,7 @@ namespace ComandoRadioElectrico.Core.DAO.DAOBase
     public abstract class DAOBase<T> : IDAOBase<T> where T:class
     {
     
-        public void Create(T pEntity)
+        public int Create(T pEntity)
         {
             try
             {
@@ -17,9 +17,10 @@ namespace ComandoRadioElectrico.Core.DAO.DAOBase
                 var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
                 var mSession = mSessionFactory.OpenSession();
                 var mTx = mSession.BeginTransaction();
-                mSession.Save(pEntity);
+                int mId = mSession.Save(pEntity).GetHashCode();
                 mTx.Commit();
                 mSession.Close();
+                return mId;
             }
             catch (GenericADOException ex)
             {

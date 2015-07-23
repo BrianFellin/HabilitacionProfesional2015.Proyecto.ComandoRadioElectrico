@@ -30,6 +30,10 @@ namespace ComandoRadioElectrico.WinForms.Views
             mAccountView.ShowDialog();
         }
 
-      
+        private void gestionDeCobradoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PantallaCobradores mOfficerView = new PantallaCobradores();
+            mOfficerView.ShowDialog();
+        }      
     }
 }

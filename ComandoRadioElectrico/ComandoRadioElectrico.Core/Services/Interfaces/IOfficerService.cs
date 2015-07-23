@@ -5,14 +5,7 @@ using System.Collections.Generic;
 namespace ComandoRadioElectrico.Core.Services.Interfaces
 {
     public interface IOfficerService
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pOfficerId"></param>
-        /// <returns></returns>
-        OfficerDTO GetOfficer(int pOfficerId);
-
+    {   
         /// <summary>
         /// 
         /// </summary>
@@ -31,13 +24,20 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// 
         /// </summary>
         /// <param name="pOfficerToDelete"></param>
-        void DeleteOfficer(DeletedEntityDTO pOfficerToDelete);
+        void DeleteOfficer(OfficerDTO pOfficerToDelete);
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        IList<OfficerDTO> GetAll();
+        IEnumerable<OfficerDTO> GetAll();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pCriteria"></param>
+        /// <returns></returns>
+        FindEntityResultDTO<OfficerDTO> FindOfficer(FindEntityDTO pCriteria);
 
     }
 }

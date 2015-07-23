@@ -23,6 +23,7 @@ namespace ComandoRadioElectrico.Core.Utils
             Mapper.CreateMap<DocumentTypeDTO, DocumentType>();
             Mapper.CreateMap<QuotaDTO, Quota>();  
             Mapper.CreateMap<FindEntityResult<AccountantAccount>,FindEntityResultDTO<AccountantAccountDTO>>();
+            Mapper.CreateMap<FindEntityResult<Officer>, FindEntityResultDTO<OfficerDTO>>();
         }      
     }
 }

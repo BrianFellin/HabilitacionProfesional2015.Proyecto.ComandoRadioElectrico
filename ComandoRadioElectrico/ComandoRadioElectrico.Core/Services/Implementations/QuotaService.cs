@@ -61,7 +61,7 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
                 throw new BusinessException("El período que se desea generar ya ha sido generado");
 
             //Creo el periodo de cuotas y obtengo el ID
-            int mIdPeriod = this.iGeneratedPeriodDAO.CreatePeriod(new GeneratedPeriod {Month = pMonth.ToString(), Year = pYear});
+            int mIdPeriod = this.iGeneratedPeriodDAO.Create(new GeneratedPeriod {Month = pMonth.ToString(), Year = pYear});
 
             GeneratedPeriod mPeriod = this.iGeneratedPeriodDAO.GetById(mIdPeriod);
 
