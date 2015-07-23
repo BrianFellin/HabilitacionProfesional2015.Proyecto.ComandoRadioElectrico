@@ -39,5 +39,12 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// <returns></returns>
         IList<PartnerDTO> GetAll();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pCriteria"></param>
+        /// <returns></returns>
+        FindEntityResultDTO<PartnerDTO> FindPartner(FindEntityDTO pCriterio);
+
     }
 }

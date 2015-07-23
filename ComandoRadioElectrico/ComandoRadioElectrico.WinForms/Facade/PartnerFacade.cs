@@ -13,9 +13,17 @@ namespace ComandoRadioElectrico.WinForms.Facade
             iPartnerSvc.CreatePartner(pPartner);
         }
 
-        public static IList<PartnerDTO> GetAll()
+        public static FindEntityResultDTO<PartnerDTO> Search(string pSearchText, int pPage)
         {
-            return iPartnerSvc.GetAll();
+            FindEntityResultDTO<PartnerDTO> mResult = iPartnerSvc.FindPartner(new FindEntityDTO
+            {
+                QuickSearchText = pSearchText,
+                RecordCount = 10,
+                SkipRecordCount = pPage * 10,
+                OrderByDirectionDescending = true
+            });
+
+            return mResult;
         }
 
         public static PartnerDTO Get(int pPartnerId)

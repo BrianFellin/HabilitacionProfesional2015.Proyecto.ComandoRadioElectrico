@@ -22,16 +22,16 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// <summary>
         /// Este metodo permite llenar el ComboBox de los tipos de documentos.
         /// </summary>
-        private void LlenarComboBoxTipoDocumento()
+        private void LoadComboBoxDocumentType()
         {
             //Se llamam a la fachada y se completa con la lista de tipos de documentos.
-            cbTipoDocumento.DataSource = DocumentTypeFacade.GetAll();
+            cbDocumentType.DataSource = DocumentTypeFacade.GetAll();
         }
 
         /// <summary>
         /// Este metodo permite llenar el ComboBox de los Cobradores.
         /// </summary>
-        private void LlenarComboBoxCobradores()
+        private void LoadComboBoxOfficer()
         {
             IList<OfficerComboBoxAdapter> mListaRelleno = new List<OfficerComboBoxAdapter>();
             foreach (OfficerDTO officer in OfficerFacade.GetAllOfficer())
@@ -45,7 +45,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             cbOfficer.DataSource = mListaRelleno;
         }
 
-        private void LlenarComboBoxDel()
+        private void LoadComboBoxDel()
         {
             IList<CollectDayComboBoxAdapter> mListaRellenoDel = new List<CollectDayComboBoxAdapter>();
             for (int indice = 1; indice <= 31; indice++)
@@ -55,7 +55,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             cbDel.DataSource = mListaRellenoDel;
         }
 
-        private void LlenarComboBoxAl()
+        private void LoadComboBoxAl()
         {
             IList<CollectDayComboBoxAdapter> mListaRellenoAl = new List<CollectDayComboBoxAdapter>();
             for (int indice = 1; indice <= 31; indice++)
@@ -69,10 +69,11 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// Este metodo obtiene todos los socios y los carga en el DataGridView, para ello utiliza un modelo
         /// especial "PartnerGridViewAdapter" que solo tiene los datos necesarios para el DataGridView.
         /// </summary>
-        private void CargarDataGridViewSocios()
+        private void LoadDataGridViewPartner()
         {
             IList<PartnerGridViewAdapter> mListaRelleno = new List<PartnerGridViewAdapter>();
-            foreach (PartnerDTO partner in PartnerFacade.GetAll())
+
+            foreach (PartnerDTO partner in PartnerFacade.Search("", Convert.ToInt32(tbPage.Text) - 1).Result)
             {
                 mListaRelleno.Add(new PartnerGridViewAdapter
                 {
@@ -83,7 +84,7 @@ namespace ComandoRadioElectrico.WinForms.Views
                     Domicile = partner.Person.Domicile
                 });
             }
-            DataGridViewSocios.DataSource = mListaRelleno;//.OrderBy(o => o.FirstName).ToList();
+            DataGridViewPartner.DataSource = mListaRelleno;
 
         }
 
@@ -94,11 +95,11 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// <param name="e"></param>
         private void PantallaSocios_Load(object sender, EventArgs e)
         {
-            this.LlenarComboBoxAl();
-            this.LlenarComboBoxDel();            
-            this.LlenarComboBoxTipoDocumento();
-            this.LlenarComboBoxCobradores();
-            this.CargarDataGridViewSocios();
+            this.LoadComboBoxAl();
+            this.LoadComboBoxDel();            
+            this.LoadComboBoxDocumentType();
+            this.LoadComboBoxOfficer();
+            this.LoadDataGridViewPartner();
         }
 
         /// <summary>
@@ -107,12 +108,12 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewSocios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewPartner_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.DataGridViewSocios.Columns[e.ColumnIndex].Name.Equals("Seleccionar"))
+            if (this.DataGridViewPartner.Columns[e.ColumnIndex].Name.Equals("Seleccionar"))
             {
-                PartnerGridViewAdapter row = (PartnerGridViewAdapter)DataGridViewSocios.CurrentRow.DataBoundItem;
-                CargarDatosFilaSelccionadaDataGridView(row.Id);
+                PartnerGridViewAdapter row = (PartnerGridViewAdapter)DataGridViewPartner.CurrentRow.DataBoundItem;
+                LoadDateRowSelctDataGridView(row.Id);
                 tbIdPartnerSelected.Text = row.Id.ToString();
             }
         }
@@ -121,7 +122,7 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// Buscar un socio y carga sus datos en la pantalla.
         /// </summary>
         /// <param name="pIdSocio"></param>
-        private void CargarDatosFilaSelccionadaDataGridView(int pIdSocio)
+        private void LoadDateRowSelctDataGridView(int pIdSocio)
         {
             bNew.Visible = false;
             bRestore.Visible = true;
@@ -138,7 +139,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             tbStartDate.Text = mPartner.StarDate.ToString();
             tbTelephone.Text = mPartner.Person.Telephone;
             tbValueQuota.Text = mPartner.ValueQuota.ToString();
-            cbTipoDocumento.SelectedValue = mPartner.Person.DocumentTypeId;
+            cbDocumentType.SelectedValue = mPartner.Person.DocumentTypeId;
             for (int indice = 0; indice< mPartner.CollectDay.Length;indice++)
             {
                 if(mPartner.CollectDay[indice].Equals('-'))
@@ -156,19 +157,19 @@ namespace ComandoRadioElectrico.WinForms.Views
         /// Este metodo permite vaciar todos los TextBox que tienen datos que fueron cargados 
         /// o al seleccionar una fila del DataGridView.
         /// </summary>
-        private void CleanDatosFilaSeleccionadaDataGridView()
+        private void CleanDataRowSelectDataGridView()
         {
             tbFirstName.Text = "";
             tbLastName.Text = "";
-            LlenarComboBoxAl();
-            LlenarComboBoxDel();
+            LoadComboBoxAl();
+            LoadComboBoxDel();
             tbCollectDomicile.Text = "";
             mtDocumentNumber.Text = "";
             tbDomicile.Text = "";
             tbStartDate.Text = "";
             tbTelephone.Text = "";
             tbValueQuota.Text = "";
-            cbTipoDocumento.SelectedValue = 1;
+            cbDocumentType.SelectedValue = 1;
             tbValueQuota.Text = Convert.ToString(0);
             this.CleanErrorElemnts();
             tbIdPartnerSelected.Text = "";
@@ -201,7 +202,7 @@ namespace ComandoRadioElectrico.WinForms.Views
             bRestore.Visible = false;
             bUpdate.Enabled = false;
             bDelete.Enabled = false;
-            CleanDatosFilaSeleccionadaDataGridView();
+            CleanDataRowSelectDataGridView();
         }
 
         private void bNew_Click(object sender, EventArgs e)
@@ -213,7 +214,7 @@ namespace ComandoRadioElectrico.WinForms.Views
                 {
                     FirstName = tbFirstName.Text.ToString(),
                     LastName = tbLastName.Text,
-                    DocumentTypeId = Convert.ToInt32(cbTipoDocumento.SelectedValue),
+                    DocumentTypeId = Convert.ToInt32(cbDocumentType.SelectedValue),
                     DocumentNumber = mtDocumentNumber.Text,
                     Domicile = tbDomicile.Text,
                     Telephone = tbTelephone.Text
@@ -236,8 +237,8 @@ namespace ComandoRadioElectrico.WinForms.Views
                 };
                 PartnerFacade.CreatePartner(mPartner);
                 MessageBox.Show("Socio creado satisfactoriamente", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.CleanDatosFilaSeleccionadaDataGridView();
-                this.CargarDataGridViewSocios();
+                this.CleanDataRowSelectDataGridView();
+                this.LoadDataGridViewPartner();
             }
             catch (BusinessException exception)
             {
@@ -358,8 +359,8 @@ namespace ComandoRadioElectrico.WinForms.Views
                 if (MessageBox.Show("¿Está seguro que desea dar de baja este socio?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PartnerFacade.DeletePartner(Convert.ToInt32(tbIdPartnerSelected.Text));
-                    CleanDatosFilaSeleccionadaDataGridView();
-                    this.CargarDataGridViewSocios();
+                    CleanDataRowSelectDataGridView();
+                    this.LoadDataGridViewPartner();
                     MessageBox.Show("Socio eliminada satisfactoriamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -379,7 +380,7 @@ namespace ComandoRadioElectrico.WinForms.Views
                 {
                     FirstName = tbFirstName.Text.ToString(),
                     LastName = tbLastName.Text,
-                    DocumentTypeId = Convert.ToInt32(cbTipoDocumento.SelectedValue),
+                    DocumentTypeId = Convert.ToInt32(cbDocumentType.SelectedValue),
                     DocumentNumber = mtDocumentNumber.Text,
                     Domicile = tbDomicile.Text,
                     Telephone = tbTelephone.Text
@@ -398,8 +399,8 @@ namespace ComandoRadioElectrico.WinForms.Views
                     CollectDomicile = tbCollectDomicile.Text,
                 };
                 PartnerFacade.UpdatePartner(mPartner);
-                this.CleanDatosFilaSeleccionadaDataGridView();
-                this.CargarDataGridViewSocios();
+                this.CleanDataRowSelectDataGridView();
+                this.LoadDataGridViewPartner();
 
                 MessageBox.Show("Socio modifcado satisfactoriamente", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -483,7 +484,95 @@ namespace ComandoRadioElectrico.WinForms.Views
 
         private void bRestore_Click(object sender, EventArgs e)
         {
-            this.CargarDatosFilaSelccionadaDataGridView(Convert.ToInt32(tbIdPartnerSelected.Text));
-        }        
+            this.LoadDateRowSelctDataGridView(Convert.ToInt32(tbIdPartnerSelected.Text));
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            
+            IList<PartnerGridViewAdapter> mListaRelleno = new List<PartnerGridViewAdapter>();
+
+            foreach (PartnerDTO partner in PartnerFacade.Search(tbSearch.Text.ToString(), 0).Result)
+            {
+                mListaRelleno.Add(new PartnerGridViewAdapter
+                {
+                    Id = partner.Id,
+                    FirstName = partner.Person.FirstName,
+                    LastName = partner.Person.LastName,
+                    Document = partner.Person.DocumentNumber,
+                    Domicile = partner.Person.Domicile
+                });
+            }
+            DataGridViewPartner.DataSource = mListaRelleno;
+
+        }
+
+        private void bNext_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPage.Text) == 1)
+            {
+                bBack.Enabled = true;
+            }
+            string mText = "";
+            if (tbSearch.Text != string.Empty)
+            {
+                mText = tbSearch.Text;
+            }
+
+            tbPage.Text = (Convert.ToInt32(tbPage.Text) + 1).ToString();
+            FindEntityResultDTO<PartnerDTO> mResult = PartnerFacade.Search(mText, Convert.ToInt32(tbPage.Text) - 1);
+            IList<PartnerGridViewAdapter> mListaRelleno = new List<PartnerGridViewAdapter>();
+
+            foreach (PartnerDTO partner in mResult.Result)
+            {
+                mListaRelleno.Add(new PartnerGridViewAdapter
+                {
+                    Id = partner.Id,
+                    FirstName = partner.Person.FirstName,
+                    LastName = partner.Person.LastName,
+                    Document = partner.Person.DocumentNumber,
+                    Domicile = partner.Person.Domicile
+                });
+            }
+            DataGridViewPartner.DataSource = mListaRelleno;
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = false;
+            }
+        }
+
+        private void bBack_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPage.Text) - 1 == 1)
+            {
+                bBack.Enabled = false;
+            }
+            string mText = "";
+            if (tbSearch.Text != string.Empty)
+            {
+                mText = tbSearch.Text;
+            }
+            tbPage.Text = (Convert.ToInt32(tbPage.Text) - 1).ToString();
+            FindEntityResultDTO<PartnerDTO> mResult = PartnerFacade.Search(mText, Convert.ToInt32(tbPage.Text) - 1);
+            IList<PartnerGridViewAdapter> mListaRelleno = new List<PartnerGridViewAdapter>();
+
+            foreach (PartnerDTO partner in mResult.Result)
+            {
+                mListaRelleno.Add(new PartnerGridViewAdapter
+                {
+                    Id = partner.Id,
+                    FirstName = partner.Person.FirstName,
+                    LastName = partner.Person.LastName,
+                    Document = partner.Person.DocumentNumber,
+                    Domicile = partner.Person.Domicile
+                });
+            }
+            DataGridViewPartner.DataSource = mListaRelleno;
+
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = true;
+            }
+        }
     }
 }

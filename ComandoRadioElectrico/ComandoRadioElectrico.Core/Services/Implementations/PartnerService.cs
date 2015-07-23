@@ -222,5 +222,16 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
             }
             
         }
+
+        public FindEntityResultDTO<PartnerDTO> FindPartner(FindEntityDTO pCriteria)
+        {
+            return Mapper.Map<FindEntityResult<Partner>, FindEntityResultDTO<PartnerDTO>>(this.iPartnerDAO.Find(new FindEntityParams
+            {
+                QuickSearchText = pCriteria.QuickSearchText,
+                RecordCount = pCriteria.RecordCount,
+                OrderByDirectionDescending = pCriteria.OrderByDirectionDescending,
+                SkipRecordCount = pCriteria.SkipRecordCount
+            }));
+        }
     }
 }
