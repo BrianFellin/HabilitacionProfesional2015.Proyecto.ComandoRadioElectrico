@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ComandoRadioElectrico.Core.NHibernate.Model
+namespace ComandoRadioElectrico.Core.Model
 {
     public class FindEntityParams
     {

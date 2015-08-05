@@ -7,10 +7,15 @@ namespace ComandoRadioElectrico.Core.DTO
 {
     public class OfficerDTO
     {
-        public virtual int Id { get; set; }
-        public virtual PersonDTO Person { get; set; }
-        public virtual string Code { get; set; }
-        public virtual DateTime StarDate { get; set; }
-        public virtual DateTime FinishDate { get; set; }
+        public int Id { get; set; }        
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int DocumentTypeId { get; set; }
+        public string DocumentTypeType { get; set; }
+        public string DocumentNumber { get; set; }
+        public string Domicile { get; set; }
+        public string Telephone { get; set; }        
+        public DateTime StartDate { get; set; }
+        public DateTime? FinishDate { get; set; }
     }
 }

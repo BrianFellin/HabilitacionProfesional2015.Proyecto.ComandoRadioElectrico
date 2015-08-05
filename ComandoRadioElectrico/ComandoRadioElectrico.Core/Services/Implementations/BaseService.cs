@@ -13,6 +13,10 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
         {
             return CoreServerModuleImpl.UnityContainer.Resolve<T>();
         }
-        
+
+        public IDataSession GetSession()
+        {
+            return this.Resolve<IDataSession>();
+        }
     }
 }

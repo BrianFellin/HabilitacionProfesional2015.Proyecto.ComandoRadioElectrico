@@ -1,5 +1,5 @@
 ﻿using ComandoRadioElectrico.Core.DAO.DAOBase;
-using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

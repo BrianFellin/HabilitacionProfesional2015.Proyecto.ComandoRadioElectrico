@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaCobradores));
             this.tbDateLower = new System.Windows.Forms.TextBox();
             this.tbDateIn = new System.Windows.Forms.TextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbDomicile = new System.Windows.Forms.TextBox();
-            this.tbDocumentNumber = new System.Windows.Forms.TextBox();
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -45,21 +45,30 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgOfficer = new System.Windows.Forms.DataGridView();
+            this.bCancel = new System.Windows.Forms.Button();
+            this.bUpdate = new System.Windows.Forms.Button();
+            this.bDelete = new System.Windows.Forms.Button();
+            this.bNew = new System.Windows.Forms.Button();
+            this.cbDocumentType = new System.Windows.Forms.ComboBox();
+            this.tbId = new System.Windows.Forms.TextBox();
+            this.tbDocumentNumber = new System.Windows.Forms.MaskedTextBox();
+            this.documentoSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellidoSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.domicilioSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentoSocio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.cbDocumentType = new System.Windows.Forms.ComboBox();
-            this.tbPage = new System.Windows.Forms.TextBox();
+            this.documentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finishDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telephone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentTypeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Selection = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgOfficer)).BeginInit();
             this.SuspendLayout();
             // 
             // tbDateLower
             // 
+            this.tbDateLower.Enabled = false;
             this.tbDateLower.Location = new System.Drawing.Point(466, 89);
             this.tbDateLower.Name = "tbDateLower";
             this.tbDateLower.Size = new System.Drawing.Size(235, 20);
@@ -67,6 +76,7 @@
             // 
             // tbDateIn
             // 
+            this.tbDateIn.Enabled = false;
             this.tbDateIn.Location = new System.Drawing.Point(466, 67);
             this.tbDateIn.Name = "tbDateIn";
             this.tbDateIn.Size = new System.Drawing.Size(235, 20);
@@ -78,6 +88,7 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(235, 20);
             this.tbPhone.TabIndex = 49;
+            this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhone_KeyPress);
             // 
             // tbDomicile
             // 
@@ -85,13 +96,6 @@
             this.tbDomicile.Name = "tbDomicile";
             this.tbDomicile.Size = new System.Drawing.Size(235, 20);
             this.tbDomicile.TabIndex = 47;
-            // 
-            // tbDocumentNumber
-            // 
-            this.tbDocumentNumber.Location = new System.Drawing.Point(132, 92);
-            this.tbDocumentNumber.Name = "tbDocumentNumber";
-            this.tbDocumentNumber.Size = new System.Drawing.Size(235, 20);
-            this.tbDocumentNumber.TabIndex = 46;
             // 
             // tbLastName
             // 
@@ -146,7 +150,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 92);
+            this.label5.Location = new System.Drawing.Point(11, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(115, 13);
             this.label5.TabIndex = 35;
@@ -185,83 +189,68 @@
             this.dgOfficer.AllowUserToDeleteRows = false;
             this.dgOfficer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgOfficer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.documentoSocio,
             this.nombreSocio,
             this.apellidoSocio,
             this.domicilioSocio,
-            this.documentoSocio});
-            this.dgOfficer.Location = new System.Drawing.Point(2, 170);
+            this.documentId,
+            this.startDate,
+            this.finishDate,
+            this.telephone,
+            this.documentTypeType,
+            this.id,
+            this.Selection});
+            this.dgOfficer.Location = new System.Drawing.Point(14, 142);
             this.dgOfficer.Name = "dgOfficer";
             this.dgOfficer.ReadOnly = true;
-            this.dgOfficer.Size = new System.Drawing.Size(802, 207);
+            this.dgOfficer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgOfficer.Size = new System.Drawing.Size(754, 207);
             this.dgOfficer.TabIndex = 30;
+            this.dgOfficer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOfficer_CellContentClick);
             // 
-            // nombreSocio
+            // bCancel
             // 
-            this.nombreSocio.HeaderText = "Nombre";
-            this.nombreSocio.Name = "nombreSocio";
-            this.nombreSocio.ReadOnly = true;
-            this.nombreSocio.Width = 180;
+            this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bCancel.Location = new System.Drawing.Point(717, 93);
+            this.bCancel.Name = "bCancel";
+            this.bCancel.Size = new System.Drawing.Size(75, 23);
+            this.bCancel.TabIndex = 62;
+            this.bCancel.Text = "Cancelar";
+            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
-            // apellidoSocio
+            // bUpdate
             // 
-            this.apellidoSocio.HeaderText = "Apellido";
-            this.apellidoSocio.Name = "apellidoSocio";
-            this.apellidoSocio.ReadOnly = true;
-            this.apellidoSocio.Width = 180;
+            this.bUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bUpdate.Location = new System.Drawing.Point(717, 69);
+            this.bUpdate.Name = "bUpdate";
+            this.bUpdate.Size = new System.Drawing.Size(75, 23);
+            this.bUpdate.TabIndex = 61;
+            this.bUpdate.Text = "Modificación";
+            this.bUpdate.UseVisualStyleBackColor = true;
+            this.bUpdate.Click += new System.EventHandler(this.bUpdate_Click);
             // 
-            // domicilioSocio
+            // bDelete
             // 
-            this.domicilioSocio.HeaderText = "Domicilio";
-            this.domicilioSocio.Name = "domicilioSocio";
-            this.domicilioSocio.ReadOnly = true;
-            this.domicilioSocio.Width = 250;
+            this.bDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bDelete.Location = new System.Drawing.Point(717, 45);
+            this.bDelete.Name = "bDelete";
+            this.bDelete.Size = new System.Drawing.Size(75, 23);
+            this.bDelete.TabIndex = 60;
+            this.bDelete.Text = "Baja";
+            this.bDelete.UseVisualStyleBackColor = true;
+            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
             // 
-            // documentoSocio
+            // bNew
             // 
-            this.documentoSocio.HeaderText = "Documento";
-            this.documentoSocio.Name = "documentoSocio";
-            this.documentoSocio.ReadOnly = true;
-            this.documentoSocio.Width = 148;
-            // 
-            // button3
-            // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(717, 93);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 62;
-            this.button3.Text = "Baja";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Location = new System.Drawing.Point(717, 69);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 61;
-            this.button4.Text = "Modificación";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(717, 45);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 60;
-            this.button2.Text = "Baja";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(717, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 59;
-            this.button1.Text = "Alta";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bNew.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bNew.Location = new System.Drawing.Point(717, 21);
+            this.bNew.Name = "bNew";
+            this.bNew.Size = new System.Drawing.Size(75, 23);
+            this.bNew.TabIndex = 59;
+            this.bNew.Text = "Alta";
+            this.bNew.UseVisualStyleBackColor = true;
+            this.bNew.Click += new System.EventHandler(this.bNew_Click);
             // 
             // cbDocumentType
             // 
@@ -274,30 +263,124 @@
             this.cbDocumentType.TabIndex = 63;
             this.cbDocumentType.ValueMember = "Id";
             // 
-            // tbPage
+            // tbId
             // 
-            this.tbPage.Location = new System.Drawing.Point(594, 144);
-            this.tbPage.Name = "tbPage";
-            this.tbPage.Size = new System.Drawing.Size(100, 20);
-            this.tbPage.TabIndex = 64;
-            this.tbPage.Text = "1";
+            this.tbId.Location = new System.Drawing.Point(25, 12);
+            this.tbId.Name = "tbId";
+            this.tbId.Size = new System.Drawing.Size(26, 20);
+            this.tbId.TabIndex = 66;
+            this.tbId.Visible = false;
+            // 
+            // tbDocumentNumber
+            // 
+            this.tbDocumentNumber.Location = new System.Drawing.Point(132, 93);
+            this.tbDocumentNumber.Mask = "99.999.999";
+            this.tbDocumentNumber.Name = "tbDocumentNumber";
+            this.tbDocumentNumber.Size = new System.Drawing.Size(235, 20);
+            this.tbDocumentNumber.TabIndex = 67;
+            // 
+            // documentoSocio
+            // 
+            this.documentoSocio.DataPropertyName = "DocumentNumber";
+            this.documentoSocio.HeaderText = "Documento";
+            this.documentoSocio.Name = "documentoSocio";
+            this.documentoSocio.ReadOnly = true;
+            // 
+            // nombreSocio
+            // 
+            this.nombreSocio.DataPropertyName = "FirstName";
+            this.nombreSocio.HeaderText = "Nombre";
+            this.nombreSocio.Name = "nombreSocio";
+            this.nombreSocio.ReadOnly = true;
+            // 
+            // apellidoSocio
+            // 
+            this.apellidoSocio.DataPropertyName = "LastName";
+            this.apellidoSocio.HeaderText = "Apellido";
+            this.apellidoSocio.Name = "apellidoSocio";
+            this.apellidoSocio.ReadOnly = true;
+            // 
+            // domicilioSocio
+            // 
+            this.domicilioSocio.DataPropertyName = "Domicile";
+            this.domicilioSocio.HeaderText = "Domicilio";
+            this.domicilioSocio.Name = "domicilioSocio";
+            this.domicilioSocio.ReadOnly = true;
+            // 
+            // documentId
+            // 
+            this.documentId.DataPropertyName = "DocumentTypeId";
+            this.documentId.HeaderText = "documentId";
+            this.documentId.Name = "documentId";
+            this.documentId.ReadOnly = true;
+            this.documentId.Visible = false;
+            // 
+            // startDate
+            // 
+            this.startDate.DataPropertyName = "StartDate";
+            this.startDate.HeaderText = "startDate";
+            this.startDate.Name = "startDate";
+            this.startDate.ReadOnly = true;
+            this.startDate.Visible = false;
+            // 
+            // finishDate
+            // 
+            this.finishDate.DataPropertyName = "FinishDate";
+            this.finishDate.HeaderText = "finishDate";
+            this.finishDate.Name = "finishDate";
+            this.finishDate.ReadOnly = true;
+            this.finishDate.Visible = false;
+            // 
+            // telephone
+            // 
+            this.telephone.DataPropertyName = "Telephone";
+            this.telephone.HeaderText = "Telefono";
+            this.telephone.Name = "telephone";
+            this.telephone.ReadOnly = true;
+            this.telephone.Visible = false;
+            // 
+            // documentTypeType
+            // 
+            this.documentTypeType.DataPropertyName = "DocumentTypeType";
+            this.documentTypeType.HeaderText = "documentTypeType";
+            this.documentTypeType.Name = "documentTypeType";
+            this.documentTypeType.ReadOnly = true;
+            this.documentTypeType.Visible = false;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "Id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            this.id.Width = 10;
+            // 
+            // Selection
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "Seleccionar";
+            this.Selection.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Selection.HeaderText = "";
+            this.Selection.Name = "Selection";
+            this.Selection.ReadOnly = true;
             // 
             // PantallaCobradores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 381);
-            this.Controls.Add(this.tbPage);
+            this.Controls.Add(this.tbDocumentNumber);
+            this.Controls.Add(this.tbId);
             this.Controls.Add(this.cbDocumentType);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bCancel);
+            this.Controls.Add(this.bUpdate);
+            this.Controls.Add(this.bDelete);
+            this.Controls.Add(this.bNew);
             this.Controls.Add(this.tbDateLower);
             this.Controls.Add(this.tbDateIn);
             this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.tbDomicile);
-            this.Controls.Add(this.tbDocumentNumber);
             this.Controls.Add(this.tbLastName);
             this.Controls.Add(this.tbFirstName);
             this.Controls.Add(this.label10);
@@ -325,7 +408,6 @@
         private System.Windows.Forms.TextBox tbDateIn;
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.TextBox tbDomicile;
-        private System.Windows.Forms.TextBox tbDocumentNumber;
         private System.Windows.Forms.TextBox tbLastName;
         private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.Label label10;
@@ -337,16 +419,24 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgOfficer;
+        private System.Windows.Forms.Button bCancel;
+        private System.Windows.Forms.Button bUpdate;
+        private System.Windows.Forms.Button bDelete;
+        private System.Windows.Forms.Button bNew;
+        private System.Windows.Forms.ComboBox cbDocumentType;
+        private System.Windows.Forms.TextBox tbId;
+        private System.Windows.Forms.MaskedTextBox tbDocumentNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn documentoSocio;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreSocio;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellidoSocio;
         private System.Windows.Forms.DataGridViewTextBoxColumn domicilioSocio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn documentoSocio;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cbDocumentType;
-        private System.Windows.Forms.TextBox tbPage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn documentId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn finishDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telephone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn documentTypeType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewButtonColumn Selection;
 
     }
 }

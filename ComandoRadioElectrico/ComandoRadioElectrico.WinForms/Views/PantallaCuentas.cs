@@ -39,6 +39,10 @@ namespace ComandoRadioElectrico.WinForms.Views
         {
             FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search("", Convert.ToInt32(tbPage.Text)-1);
             dgAccountantAccount.DataSource = mResult.Result;
+            if (mResult.TotalRecords < 10)
+            {
+                bNext.Enabled = false;
+            }
         }
 
         private void LoadCbAccountType()
@@ -110,6 +114,11 @@ namespace ComandoRadioElectrico.WinForms.Views
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void bDelete_Click(object sender, EventArgs e)
@@ -137,6 +146,10 @@ namespace ComandoRadioElectrico.WinForms.Views
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBaseException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -201,6 +214,10 @@ namespace ComandoRadioElectrico.WinForms.Views
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dgAccountantAccount_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -257,52 +274,72 @@ namespace ComandoRadioElectrico.WinForms.Views
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(tbSearch.Text.ToString(),0);
-            dgAccountantAccount.DataSource = mResult.Result;
+            try
+            {
+                FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(tbSearch.Text.ToString(), 0);
+                dgAccountantAccount.DataSource = mResult.Result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
         private void bNext_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(tbPage.Text) == 1)
+            try
             {
-                bBack.Enabled = true;
-            }
-            string mText = "";
-            if (tbSearch.Text != string.Empty){
-                mText = tbSearch.Text;
-            }
+                if (Convert.ToInt32(tbPage.Text) == 1)
+                {
+                    bBack.Enabled = true;
+                }
+                string mText = "";
+                if (tbSearch.Text != string.Empty)
+                {
+                    mText = tbSearch.Text;
+                }
 
-            tbPage.Text = (Convert.ToInt32(tbPage.Text) + 1).ToString();
-            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text)-1);
-            dgAccountantAccount.DataSource = mResult.Result;            
-            if (mResult.TotalRecords < 10)
+                tbPage.Text = (Convert.ToInt32(tbPage.Text) + 1).ToString();
+                FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text) - 1);
+                dgAccountantAccount.DataSource = mResult.Result;
+                if (mResult.TotalRecords <= 10 * Convert.ToInt32(tbPage.Text))
+                {
+                    bNext.Enabled = false;
+                }
+            }
+            catch (Exception ex)
             {
-                bNext.Enabled = false;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
         private void bBack_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(tbPage.Text)- 1 == 1)
+            try
             {
-                bBack.Enabled = false;
+                if (Convert.ToInt32(tbPage.Text) - 1 == 1)
+                {
+                    bBack.Enabled = false;
+                }
+                string mText = "";
+                if (tbSearch.Text != string.Empty)
+                {
+                    mText = tbSearch.Text;
+                }
+                tbPage.Text = (Convert.ToInt32(tbPage.Text) - 1).ToString();
+                FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text) - 1);
+                dgAccountantAccount.DataSource = mResult.Result;
+                if (mResult.TotalRecords >= 10 * Convert.ToInt32(tbPage.Text))
+                {
+                    bNext.Enabled = true;
+                }
             }
-            string mText = "";
-            if (tbSearch.Text != string.Empty)
+            catch (Exception ex)
             {
-                mText = tbSearch.Text;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            tbPage.Text = (Convert.ToInt32(tbPage.Text) - 1).ToString();
-            FindEntityResultDTO<AccountantAccountDTO> mResult = AccountantAccountFacade.Search(mText, Convert.ToInt32(tbPage.Text)-1);
-            dgAccountantAccount.DataSource = mResult.Result;
-            
-            if (mResult.TotalRecords < 10)
-            {
-                bNext.Enabled = true;
-            }
-            
         }
     }
 }

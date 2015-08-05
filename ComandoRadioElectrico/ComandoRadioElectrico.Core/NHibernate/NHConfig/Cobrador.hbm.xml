@@ -1,15 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ComandoRadioElectrico.Core.NHibernate.Model" assembly="ComandoRadioElectrico.Core">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ComandoRadioElectrico.Core.Model" assembly="ComandoRadioElectrico.Core">
   <class name="Officer" table="Cobrador" lazy="false">
     <id name="Id" type="int" column="Id">
       <generator class="identity"/>
     </id>
-    <property name="Code" column="Codigo"/>    
-    <property name="StarDate" column="FechaIngreso"/>
+    <property name="FirstName" column="Nombre"/>
+    <property name="LastName" column="Apellido"/>
+    <property name="DocumentNumber" column="NumeroDocumento"/>
+    <property name="Domicile" column="Domicilio"/>
+    <property name="Telephone" column="Telefono"/>
+    <property name="StartDate" column="FechaIngreso"/>
     <property name="FinishDate" column="FechaBaja"/>
 
-    <many-to-one name="Person" 
-                 column="IdPersona" class="Person" 
+    <many-to-one name="DocumentType"
+                 column="IdTipoDocumento" class="DocumentType"
                  not-null="true"/>
+
   </class>
 </hibernate-mapping>

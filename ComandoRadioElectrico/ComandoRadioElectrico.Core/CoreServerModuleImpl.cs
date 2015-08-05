@@ -1,4 +1,5 @@
 ﻿using ComandoRadioElectrico.Core.DAO;
+using ComandoRadioElectrico.Core.Services;
 using ComandoRadioElectrico.Core.Services.Implementations;
 using ComandoRadioElectrico.Core.Services.Interfaces;
 using ComandoRadioElectrico.Core.Utils;
@@ -29,8 +30,7 @@ namespace ComandoRadioElectrico.Core
             iUnityContainer.RegisterType<IDocumentTypeDAO, DocumentTypeDAO>();
             iUnityContainer.RegisterType<IAccountantAccountDAO, AccountantAccountDAO>();
             iUnityContainer.RegisterType<IPartnerDAO, PartnerDAO>();
-            iUnityContainer.RegisterType<IOfficerDAO, OfficerDAO>();
-            iUnityContainer.RegisterType<IPersonDAO, PersonDAO>();
+            iUnityContainer.RegisterType<IOfficerDAO, OfficerDAO>();            
             iUnityContainer.RegisterType<IGeneratedPeriodDAO, GeneratedPeriodDAO>();
             iUnityContainer.RegisterType<IQuotaDAO, QuotaDAO>();
 
@@ -38,6 +38,7 @@ namespace ComandoRadioElectrico.Core
 
             #region Otros servicios
             MappingHelper.CreateMaps();
+            iUnityContainer.RegisterType<IDataSession, DataSession>();
             #endregion
         }
     }                    

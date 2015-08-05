@@ -9,10 +9,8 @@ namespace ComandoRadioElectrico.WinForms.Adapter
     /// <summary>
     /// Clase que tiene parte de los datos de un Officer(Cobradores)
     /// </summary>
-    class OfficerComboBoxAdapter
+    class CollectDayComboBoxAdapter
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        
     }
 }

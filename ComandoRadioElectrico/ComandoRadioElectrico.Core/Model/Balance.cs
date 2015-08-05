@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComandoRadioElectrico.Core.NHibernate.Model
+namespace ComandoRadioElectrico.Core.Model
 {
     /// <summary>
     /// Esta clase instancia un Balance.

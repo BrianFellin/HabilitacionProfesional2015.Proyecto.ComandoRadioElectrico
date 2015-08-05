@@ -32,5 +32,33 @@ namespace ComandoRadioElectrico.WinForms.Utils
                 return true;
             }
         }
+
+        public static bool ValidateTelephone(KeyPressEventArgs pKeyPress)
+        {
+            if (pKeyPress.KeyChar == '-' )
+            {
+                return false;
+            }
+            else if (Char.IsNumber(pKeyPress.KeyChar))
+            {
+                return false;
+            }
+            else if (pKeyPress.KeyChar == '(')
+            {
+                return false;
+            }
+            else if (pKeyPress.KeyChar == ')')
+            {
+                return false;
+            }
+            else if (Char.IsControl(pKeyPress.KeyChar))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

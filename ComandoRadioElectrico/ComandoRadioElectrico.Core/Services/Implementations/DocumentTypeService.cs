@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ComandoRadioElectrico.Core.DAO;
 using ComandoRadioElectrico.Core.DTO;
-using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Model;
 using ComandoRadioElectrico.Core.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;

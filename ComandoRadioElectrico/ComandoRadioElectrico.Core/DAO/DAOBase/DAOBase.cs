@@ -1,102 +1,111 @@
 ﻿using ComandoRadioElectrico.Core.Exceptions;
-using NHibernate.Cfg;
 using NHibernate.Exceptions;
 using System.Collections.Generic;
-using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Model;
+using ComandoRadioElectrico.Core.Services.Implementations;
+using ComandoRadioElectrico.Core.Services.Interfaces;
 
 namespace ComandoRadioElectrico.Core.DAO.DAOBase
 {
-    public abstract class DAOBase<T> : IDAOBase<T> where T:class
-    {
-    
+    public abstract class DAOBase<T> : BaseService, IDAOBase<T> where T:class
+    {    
         public int Create(T pEntity)
         {
+            // sesion de datos actual
+            IDataSession mSession = this.GetSession();
             try
-            {
-                var mHibernateConfiguration = new Configuration().Configure();
-                var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
-                var mSession = mSessionFactory.OpenSession();
-                var mTx = mSession.BeginTransaction();
-                int mId = mSession.Save(pEntity).GetHashCode();
-                mTx.Commit();
-                mSession.Close();
+            {                
+                mSession.BeginTransaction();
+                // persistimos los datos
+                int mId = mSession.Save(pEntity);
+                mSession.Commit();
                 return mId;
             }
             catch (GenericADOException ex)
             {
+                mSession.RollBack();
                 throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
+            }      
+            finally
+            {
+                mSession.Dispose();
             }
-            
         }
 
         public void Update(T pEntity)
         {
+            // sesion de datos actual
+            IDataSession mSession = this.GetSession();
             try
             {
-                var mHibernateConfiguration = new Configuration().Configure();
-                var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
-                var mSession = mSessionFactory.OpenSession();
-                var tx = mSession.BeginTransaction();
+                mSession.BeginTransaction();
+                // persistimos los datos
                 mSession.SaveOrUpdate(pEntity);
-                tx.Commit();
-                mSession.Close();
+                mSession.Commit();
             }
             catch (GenericADOException ex)
             {
+                mSession.RollBack();
                 throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
+            }
+            finally
+            {
+                mSession.Dispose();
             }
         }
 
         public void Delete(int pEntityId)
         {
+            // sesion de datos actual
+            IDataSession mSession = this.GetSession();
             try
             {
-                var mHibernateConfiguration = new Configuration().Configure();
-                var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
-                var mSession = mSessionFactory.OpenSession();
-                var tx = mSession.BeginTransaction();
-                T mEntity = mSession.Get<T>(pEntityId);
-                mSession.Delete(mEntity);
-                tx.Commit();
-                mSession.Close();
+
+                mSession.BeginTransaction();
+                // eliminamos la entidad
+                mSession.Delete<T>(pEntityId);
+                mSession.Commit();
             }
             catch (GenericADOException ex)
             {
+                mSession.RollBack();
                 throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
             }
         }
 
         public T GetById(int pEntityId)
         {
+            // sesion de datos actual
+            IDataSession mSession = this.GetSession();
             try
-            {
-                var hibernateConfiguration = new Configuration().Configure();
-                var sessionFactory = hibernateConfiguration.BuildSessionFactory();
-                var mSession = sessionFactory.OpenSession();
-                T mEntity = mSession.Get<T>(pEntityId);
-                mSession.Close();
-                return mEntity;
+            {                
+                return mSession.Get<T>(pEntityId);
             }
             catch (GenericADOException ex)
             {
                 throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
+            }
+            finally
+            {
+                mSession.Dispose();
             }
         }
 
         public IEnumerable<T> GetAll()
         {
+            // sesion de datos actual
+            IDataSession mSession = this.GetSession();
             try
-            {
-                var mHibernateConfiguration = new Configuration().Configure();
-                var mSessionFactory = mHibernateConfiguration.BuildSessionFactory();
-                var mSession = mSessionFactory.OpenSession();
-                IEnumerable<T> mList = mSession.QueryOver<T>().List();
-                mSession.Close();
-                return mList;
+            {                
+                return mSession.GetRepository<T>();                
             }
             catch (GenericADOException ex)
             {
                 throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
+            }
+            finally
+            {
+                mSession.Dispose();
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿using ComandoRadioElectrico.Core.DAO.DAOBase;
 using ComandoRadioElectrico.Core.Exceptions;
-using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Model;
 using NHibernate.Cfg;
 using NHibernate.Exceptions;
 using System;

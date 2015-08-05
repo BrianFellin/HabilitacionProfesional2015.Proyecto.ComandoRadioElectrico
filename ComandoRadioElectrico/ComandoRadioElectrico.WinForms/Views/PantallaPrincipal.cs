@@ -34,6 +34,11 @@ namespace ComandoRadioElectrico.WinForms.Views
         {
             PantallaCobradores mOfficerView = new PantallaCobradores();
             mOfficerView.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            QuotaFacade.GenerateQuotas(Core.Utils.MonthPeriod.Septiembre, 2015);
         }      
     }
 }

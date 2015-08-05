@@ -2,7 +2,7 @@
 using ComandoRadioElectrico.Core.DAO;
 using ComandoRadioElectrico.Core.DTO;
 using ComandoRadioElectrico.Core.Exceptions;
-using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Model;
 using ComandoRadioElectrico.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,43 +12,34 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
 {
     public class OfficerService : BaseService, IOfficerService
     {
-        private IOfficerDAO iOfficerDAO;
-        private IPersonDAO iPersonDAO;
+        private IOfficerDAO iOfficerDAO;        
         private IDocumentTypeDAO iDocumentTypeDAO;
 
         public OfficerService()
         {
-            this.iOfficerDAO = this.Resolve<IOfficerDAO>();
-            this.iPersonDAO = this.Resolve<IPersonDAO>();
+            this.iOfficerDAO = this.Resolve<IOfficerDAO>();            
             this.iDocumentTypeDAO = this.Resolve<IDocumentTypeDAO>();
         }
 
         public void CreateOfficer(OfficerDTO pOfficerToCreate)
         {
             //Validamos los campos del parametro de entrada
-            if (pOfficerToCreate.Code == string.Empty                                  
-                 || pOfficerToCreate.StarDate == null)
+            if (pOfficerToCreate.FirstName == string.Empty                                  
+                 || pOfficerToCreate.LastName == null
+                 || pOfficerToCreate.DocumentTypeId == 0
+                 || pOfficerToCreate.DocumentNumber == null)
                 throw new BusinessException("Campos de datos obligatorios estan vacios");
 
             // creamos el objeto cobrador
             Officer mNewOfficer = Mapper.Map<OfficerDTO, Officer>(pOfficerToCreate);
-
-
-             //Obtenemos la persona del cobrador
-             mNewOfficer.Person = this.iPersonDAO.GetById(pOfficerToCreate.Person.Id);
-             //Si no se encontro la persona, se crea y luego se la asigna al cobrador
-             if (mNewOfficer.Person == null)
-             {
-                 Person mNewPerson = Mapper.Map<PersonDTO, Person>(pOfficerToCreate.Person);
-                 mNewPerson.DocumentType = this.iDocumentTypeDAO.GetById(pOfficerToCreate.Person.DocumentTypeId);
-                 mNewOfficer.Person = this.iPersonDAO.GetById(this.iPersonDAO.Create(mNewPerson));
-             }
-        
-            //validamos que el codigo sea unico y no halla otro cobrador con el mismo codigo
-            if ((from a in this.iOfficerDAO.GetAll() where a.Code == pOfficerToCreate.Code select a).Count() > 0)
+                  
+            //validamos que el dni sea unico y no halla otro cobrador con el mismo dni
+            if ((from a in this.iOfficerDAO.GetAll() where a.DocumentNumber == pOfficerToCreate.DocumentNumber select a).Count() > 0)
             {
                 throw new BusinessException("Ya existe un cobrador con el codigo ingresado, ingrese otro");
             }
+            //Obtengo el tipo de documento
+            mNewOfficer.DocumentType = this.iDocumentTypeDAO.GetById(pOfficerToCreate.DocumentTypeId);
 
             // persistimos la informacion 
             this.iOfficerDAO.Create(mNewOfficer);
@@ -60,8 +51,10 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
             if (pOfficerToUpdate == null) throw new System.ArgumentNullException("pOfficerToUpdate");
 
             //Validamos los campos del parametro de entrada
-            if (pOfficerToUpdate.Code == string.Empty
-                 || pOfficerToUpdate.StarDate == null)
+            if (pOfficerToUpdate.FirstName == string.Empty
+                 || pOfficerToUpdate.LastName == null
+                 || pOfficerToUpdate.DocumentTypeId == 0
+                 || pOfficerToUpdate.DocumentNumber == null)
                 throw new BusinessException("Campos de datos obligatorios estan vacios");
 
             // obtenemos el objeto a modificar
@@ -70,19 +63,15 @@ namespace ComandoRadioElectrico.Core.Services.Implementations
             // validamos que se haya encontrado el cobrador
             if (mOfficerToUpdate == null) throw new System.InvalidOperationException(string.Format("Cobrador no encontrado", pOfficerToUpdate.Id));
             
-            //validamos que el codigo sea unico y no halla otro cobrador con el mismo codigo
-            if ((from a in this.iOfficerDAO.GetAll() where a.Code == pOfficerToUpdate.Code & a.Id != pOfficerToUpdate.Id select a).Count() > 0)
+            //validamos que el dni sea unico y no halla otro cobrador con el mismo dni
+            if ((from a in this.iOfficerDAO.GetAll() where a.DocumentNumber == pOfficerToUpdate.DocumentNumber & a.Id != pOfficerToUpdate.Id select a).Count() > 0)
             {
-                throw new BusinessException("Ya existe un cobrador con el codigo ingresado, ingrese otro");
+                throw new BusinessException("Ya existe un cobrador con el dni ingresado, ingrese otro");
             }
-            if (mOfficerToUpdate.Person.DocumentNumber != pOfficerToUpdate.Person.DocumentNumber)
+            //Si cambio el tipo de documento, se actualiza
+            if (pOfficerToUpdate.DocumentTypeId != mOfficerToUpdate.DocumentType.Id )
             {
-                mOfficerToUpdate.Person.DocumentNumber = pOfficerToUpdate.Person.DocumentNumber;
-                // Se controla que no exista el cobrador
-                if ((from p in this.iOfficerDAO.GetAll() where p.Person.DocumentNumber == mOfficerToUpdate.Person.DocumentNumber & p.Id != pOfficerToUpdate.Id select p).ToList().Count > 0)
-                {
-                    throw new PartnerException("Ya existe una persona con ese documento, verifique los datos");
-                }
+                mOfficerToUpdate.DocumentType = this.iDocumentTypeDAO.GetById(pOfficerToUpdate.DocumentTypeId);
             }
             Mapper.Map<OfficerDTO, Officer>(pOfficerToUpdate, mOfficerToUpdate);
 

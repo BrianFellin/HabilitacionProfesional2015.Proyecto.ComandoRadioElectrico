@@ -1,9 +1,10 @@
 ﻿using ComandoRadioElectrico.Core.DAO.DAOBase;
-using ComandoRadioElectrico.Core.NHibernate.Model;
-using System;
+using ComandoRadioElectrico.Core.Exceptions;
+using ComandoRadioElectrico.Core.Model;
+using ComandoRadioElectrico.Core.Services.Interfaces;
+using NHibernate.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ComandoRadioElectrico.Core.DAO
 {
@@ -11,31 +12,43 @@ namespace ComandoRadioElectrico.Core.DAO
     {
         public override FindEntityResult<Officer> Find(FindEntityParams pFindParams)
         {
-            IEnumerable<Officer> mSectBaseQry = (from t in this.GetAll().OrderBy(m => m.Person.FirstName) select t);
+            // obtenemos la sesion actual
+            IDataSession mSession = this.GetSession();
+            try
+            {
+                IEnumerable<Officer> mSectBaseQry = (from t in mSession.GetRepository<Officer>().OrderBy(m => m.FirstName) select t);
 
-            IEnumerable<Officer> mSectFilteredQry = mSectBaseQry;
+                IEnumerable<Officer> mSectFilteredQry = mSectBaseQry;
 
-            if (pFindParams.QuickSearchText != string.Empty)
-                mSectFilteredQry = mSectBaseQry.Where(t => t.Person.FirstName.Contains(pFindParams.QuickSearchText) ||
-                                                           t.Code.Contains(pFindParams.QuickSearchText) ||
-                                                           t.Person.LastName.Contains(pFindParams.QuickSearchText) ||
-                                                           t.Person.DocumentNumber.Contains(pFindParams.QuickSearchText)||
-                                                           t.Person.Telephone.Contains(pFindParams.QuickSearchText));
+                if (pFindParams.QuickSearchText != string.Empty)
+                    mSectFilteredQry = mSectBaseQry.Where(t => t.FirstName.Contains(pFindParams.QuickSearchText) ||
+                                                           t.LastName.Contains(pFindParams.QuickSearchText) ||
+                                                           t.DocumentNumber.Contains(pFindParams.QuickSearchText) ||
+                                                           t.Telephone.Contains(pFindParams.QuickSearchText));
 
 
-            int mTotalRecords = mSectFilteredQry.Count();
-            
-            IEnumerable<Officer> mAccounts = mSectFilteredQry
+                int mTotalRecords = mSectFilteredQry.Count();
+
+                IEnumerable<Officer> mOfficers = mSectFilteredQry
                             .Skip(pFindParams.SkipRecordCount)
                             .Take(pFindParams.RecordCount)
-                            .OrderBy(m => m.Person.FirstName)
+                            .OrderBy(m => m.FirstName)
                             .ToList();
 
-            return new FindEntityResult<Officer>
+                return new FindEntityResult<Officer>
+                {
+                    TotalRecords = mTotalRecords,
+                    Result = mOfficers                    
+                };
+            }
+            catch (GenericADOException ex)
+            {              
+                throw new DataBaseException("Error en el acceso a los datos, intente mas tarde", ex);
+            }
+            finally
             {
-                TotalRecords = mTotalRecords,
-                Result = mAccounts
-            };
+                mSession.Dispose();
+            }
         }
     }
 }

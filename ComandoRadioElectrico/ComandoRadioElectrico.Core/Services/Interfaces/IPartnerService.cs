@@ -31,13 +31,20 @@ namespace ComandoRadioElectrico.Core.Services.Interfaces
         /// 
         /// </summary>
         /// <param name="pPartnerToDelete"></param>
-        void DeletePartner(DeletedEntityDTO pPartnerToDelete);
+        void DeletePartner(int pPartnerId);
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         IList<PartnerDTO> GetAll();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pCriteria"></param>
+        /// <returns></returns>
+        FindEntityResultDTO<PartnerDTO> FindPartner(FindEntityDTO pCriterio);
 
     }
 }

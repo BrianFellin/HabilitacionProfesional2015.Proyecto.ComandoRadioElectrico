@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ComandoRadioElectrico.Core.DTO;
 using ComandoRadioElectrico.Core.DAO;
 using AutoMapper;
-using ComandoRadioElectrico.Core.NHibernate.Model;
+using ComandoRadioElectrico.Core.Model;
 using ComandoRadioElectrico.Core.Exceptions;
 using System.Linq;
 
